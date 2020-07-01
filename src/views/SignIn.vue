@@ -1,6 +1,6 @@
 <template>
   <div id="signin">
-    <h1>ログイン画面</h1>
+    <h2>ログイン画面</h2>
     <table>
       <tr>
         <td>
@@ -21,11 +21,7 @@
       </tr>
     </table>
     <br />
-    <br />
-
-    <button @click="login">ログイン</button>
-    <br />
-    <router-link class="signin" to="/signup">新規登録はこちらから</router-link>
+    <button class="login" @click="login">ログイン</button>
     <button @click="resetPassword()" class="resetPassword">パスワードを忘れた</button>
   </div>
 </template>
@@ -43,7 +39,10 @@ export default {
   },
   methods: {
     resetPassword: function() {
-      this.email = window.prompt("ご登録されたメールアドレスをご入力下さい", "");
+      this.email = window.prompt(
+        "ご登録されたメールアドレスをご入力下さい",
+        ""
+      );
       firebase.auth().languageCode = "ja"; // 日本語に設定
       firebase
         .auth()
@@ -51,7 +50,6 @@ export default {
         .then(() => {
           this.email = "";
           alert("パスワード再発行URLを送信しました。");
-           
         })
         .catch(error => {
           alert(error, "該当するデータが見つかりませんでした。");
@@ -62,7 +60,7 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
-          this.$router.push("/loginhome");
+          // this.$router.push("/");
         })
         .catch(error => {
           alert(error.message);
@@ -85,24 +83,24 @@ export default {
 
 
 <style scoped>
+#signin h2 {
+  margin-bottom: 1em;
+}
 #signin {
   font-family: "Avenir", "Helvetica", "Arial", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  position: absolute;
+  /* position: absolute;
   top: 40%;
   left: 50%;
-  transform: translateY(-50%) translateX(-50%);
-  padding: 5rem;
-  background: radial-gradient(rgb(255, 255, 255), rgb(240, 240, 240));
-  border-radius: 5px;
-  box-shadow: 0 5px 20px -3px rgb(116, 116, 116);
+  transform: translateY(-50%) translateX(-50%); */
+  padding: 3rem;
 }
 
 table {
   margin: 0 auto;
-  font-size: 1.6em;
+  /* font-size: 1.0em; */
 }
 
 ::placeholder {
@@ -113,20 +111,18 @@ button {
   color: rgb(255, 255, 255);
   padding: 8px 15px;
   border-radius: 5px;
-  font-size: 1.6em;
+  /* font-size: 0.8em; */
   background: #1ab6ff;
   box-shadow: 5px 5px 6px -3px rgba(0, 0, 0, 0.2);
   font-weight: 300;
 }
 
-.signin {
-  display: block;
-  font-size: 1.3em;
-  margin-bottom: 1rem;
+.login{
+  margin-bottom:1rem ;  
 }
 
 td {
-  padding: 1.2rem;
+  padding: 0.8rem;
 }
 
 input {
@@ -138,7 +134,7 @@ input {
   margin: 0 auto;
   display: block;
   color: rgb(97, 97, 97);
-  font-size: 1.3em;
+  font-size: 0.6em;
   border: none; /* 枠線を消す */
   outline: none; /* クリックしたときに表示される枠線を消す */
   background: transparent;
