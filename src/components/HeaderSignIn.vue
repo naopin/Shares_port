@@ -6,7 +6,10 @@
           <p class="navbar_log">Shares</p>
           <ul>
             <li>
-              <router-link to="/signin">SHARE</router-link>
+              <router-link to="/share">SHARE</router-link>
+            </li>
+              <li>
+              <router-link to="/profile">PROFILE</router-link>
             </li>
             <li>
                <button @click="logout">ログアウト</button>
@@ -38,6 +41,20 @@ export default {
           alert(error.message);
         });
     },
+  },
+  created() {
+    this.$nextTick(function() {
+      firebase.auth().onAuthStateChanged((user)=> {
+        if (user) {
+          console.log("ログイン中", user);
+        
+        } else {
+          console.log("ログインアウト中");
+         this.$router.push("/");
+        }
+      });
+    });
+    // console.log(this.navbar); // =null
   }
 };
 </script>
