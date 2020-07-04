@@ -5,6 +5,7 @@ import SignUp from '../views/SignUp.vue'
 import SignIn from '../views/SignIn.vue'
 
 import HomeSignIn from '../views/HomeSignIn.vue'
+import Share from '../views/Share.vue'
 
 Vue.use(VueRouter)
 
@@ -13,6 +14,11 @@ Vue.use(VueRouter)
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/share',
+    name: 'Share',
+    component: Share
   },
   {
     path: '/signin',
