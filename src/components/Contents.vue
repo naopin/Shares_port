@@ -12,6 +12,8 @@
           <label for="articleSearch">記事</label>
       </div>
     </form>
+
+    
   </div>
 </template>
 
@@ -23,13 +25,6 @@ export default {
       keyword:"",
     };
   },
-  //  created: function ()  {
-  //   this.$axios.get(" https://www.googleapis.com/youtube/v3/search").then(res => {
-  //     console.log(res)
-  //   }).catch(err => {
-  //     console.log(err)
-  //   })
-  // },
 };
 </script>
 

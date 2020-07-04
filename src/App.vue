@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <router-view/>
-    <!-- <router-link to="/video">Search Video</router-link> -->
   </div>
 </template>
 

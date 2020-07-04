@@ -1,6 +1,6 @@
 <template>
      <div id="menu">
-      <button class="menu-list" v-for="item in menu_list" :key="item.name">{{item.name}}</button>
+      <button  @click="menu(item.name)" class="menu-list" v-for="item in menu_list" :key="item.name">{{item.name}}</button>
     </div>
 </template>
 
@@ -16,7 +16,7 @@ export default {
         { name: "Angular" },
         { name: "Node.js" },
         { name: "Other" }
-      ]
+      ],
     };
   },
 };
@@ -65,7 +65,7 @@ a:hover {
   background: #e9e9e8;
 }
 .menu-list {
-  padding: 1rem 3rem;
+  padding: 1.5rem 6rem;
 
   cursor: pointer;
 }
