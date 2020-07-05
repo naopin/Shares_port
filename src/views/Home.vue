@@ -6,7 +6,7 @@
     <div v-if="navbar">
       <HeaderSignIn></HeaderSignIn>
     </div>
-    <Contents></Contents>
+    <!-- <Contents></Contents> -->
   </div>
 </template>
 
@@ -14,11 +14,11 @@
 <script>
 import Header from "@/components/Header.vue";
 import HeaderSignIn from "@/components/HeaderSignIn.vue";
-import Contents from "@/components/Contents.vue";
+// import Contents from "@/components/Contents.vue";
 import firebase from "firebase";
 
 export default {
-  components: { Header, Contents, HeaderSignIn },
+  components: { Header,  HeaderSignIn },
   name: "Home",
   data() {
     return {
