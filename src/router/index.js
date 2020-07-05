@@ -4,8 +4,8 @@ import Home from '../views/Home.vue'
 import SignUp from '../views/SignUp.vue'
 import SignIn from '../views/SignIn.vue'
 
-import Video from '../views/Video.vue'
-import LoginHome from '../views/LoginHome.vue'
+import HomeSignIn from '../views/HomeSignIn.vue'
+import Share from '../views/Share.vue'
 
 Vue.use(VueRouter)
 
@@ -14,6 +14,11 @@ Vue.use(VueRouter)
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/share',
+    name: 'Share',
+    component: Share
   },
   {
     path: '/signin',
@@ -25,16 +30,10 @@ Vue.use(VueRouter)
     name: 'SignUp',
     component: SignUp
   },
-
   {
-    path: '/video',
-    name: 'Video',
-    component: Video
-  },
-  {
-    path: '/loginhome',
-    name: 'LoginHome',
-    component: LoginHome
+    path: '/homesignin',
+    name: 'HomeSignIn',
+    component: HomeSignIn
   },
   {
     path: '/about',

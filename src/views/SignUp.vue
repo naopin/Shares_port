@@ -1,6 +1,6 @@
 <template>
   <div id="signup">
-    <h1>アカウント登録</h1>
+    <h2>アカウント登録</h2>
     <table>
       <tr>
         <td>
@@ -46,11 +46,8 @@
       </tr>
     </table>
     <br />
-    <br />
-
     <button @click="register">新規登録</button>
     <br />
-    <router-link class="signup" to="/signin">ログインはこちらから</router-link>
   </div>
 </template>
 
@@ -104,7 +101,7 @@ export default {
                     username: userInfo.displayName,
                     email: userInfo.email
                   });
-                this.$router.push("/loginhome");
+                // this.$router.push("/homesignin");
               })
               .catch(error => {
                 alert(error.message);
@@ -120,31 +117,35 @@ export default {
       } else {
         this.alert = "パスワードが一致していません";
       }
-    },
+    }
   }
 };
 </script>
 
 
 <style scoped>
+#signup h2 {
+  margin-bottom: 1em;
+}
+
 #signup {
   font-family: "Avenir", "Helvetica", "Arial", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  position: absolute;
+  /* position: absolute;
   top: 40%;
   left: 50%;
-  transform: translateY(-50%) translateX(-50%);
-  padding: 5rem;
-  background: radial-gradient(rgb(255, 255, 255), rgb(240, 240, 240));
+  transform: translateY(-50%) translateX(-50%); */
+  padding: 3rem;
+  /* background: radial-gradient(rgb(255, 255, 255), rgb(240, 240, 240));
   border-radius: 5px;
-  box-shadow: 0 5px 20px -3px rgb(116, 116, 116);
+  box-shadow: 0 5px 20px -3px rgb(116, 116, 116); */
 }
 
 table {
   margin: 0 auto;
-  font-size: 1.6em;
+  /* font-size: 1.6em; */
 }
 
 ::placeholder {
@@ -155,18 +156,14 @@ button {
   color: rgb(255, 255, 255);
   padding: 8px 15px;
   border-radius: 5px;
-  font-size: 1.6em;
+  /* font-size: 1.6em; */
   background: #ff801a;
   box-shadow: 5px 5px 6px -3px rgba(0, 0, 0, 0.2);
   font-weight: 300;
 }
 
-.signup {
-  font-size: 1.3em;
-}
-
 td {
-  padding: 1.2rem;
+  padding: 0.8rem;
 }
 
 input {

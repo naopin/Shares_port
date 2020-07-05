@@ -6,36 +6,57 @@
           <p class="navbar_log">Shares</p>
           <ul>
             <li>
-              <router-link to="/signin">SIGNIN</router-link>
+              <div class="modal-window">
+                <button @click="SignInopenModal">SIGNIN</button>
+                <MyModal @close="SignIncloseModal" v-if="SignInModal">
+                  <SignIn></SignIn>
+                </MyModal>
+              </div>
             </li>
             <li>
-              <router-link to="/signup">SIGNUP</router-link>
+              <div class="modal-window">
+                <button @click="SignOutopenModal">SIGNUP</button>
+                <MyModal @close="SignOutcloseModal" v-if="SignOutModal">
+                  <SignUp></SignUp>
+                </MyModal>
+              </div>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-    <div id="menu">
-      <button class="menu-list" v-for="item in menu_list" :key="item.name">{{item.name}}</button>
-    </div>
+    <SelctMenu></SelctMenu>
   </header>
 </template>
 
 
 <script>
+import SelctMenu from "../components/SelctMenu";
+import MyModal from "../components/Mymodal";
+import SignIn from "../views/SignIn";
+import SignUp from "../views/SignUp";
 export default {
+  components: { SelctMenu, MyModal, SignIn, SignUp },
   name: "Header",
   data() {
     return {
-      menu_list: [
-        { name: "Javascript" },
-        { name: "Vue.js" },
-        { name: "React" },
-        { name: "Angular" },
-        { name: "Node.js" },
-        { name: "Other" }
-      ]
+      SignInModal: false,
+      SignOutModal: false
     };
+  },
+  methods: {
+    SignInopenModal() {
+      this.SignInModal = true;
+    },
+    SignIncloseModal() {
+      this.SignInModal = false;
+    },
+    SignOutopenModal() {
+      this.SignOutModal = true;
+    },
+    SignOutcloseModal() {
+      this.SignOutModal = false;
+    }
   }
 };
 </script>
@@ -73,47 +94,6 @@ a:hover {
   text-shadow: 2px 2px 3px #acabab;
 }
 
-#menu {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2em;
-  text-shadow: 6px 6px 10px #acabab;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-  background: #e9e9e8;
-}
-.menu-list {
-  padding: 1rem 3rem;
 
-  cursor: pointer;
-}
-.menu-list:nth-child(1):hover {
-  background: rgb(250, 253, 60);
-}
-.menu-list:nth-child(2):hover {
-  background: rgb(116, 255, 60);
-}
-.menu-list:nth-child(3):hover {
-  background: rgb(60, 226, 255);
-}
-.menu-list:nth-child(4):hover {
-  background: rgb(253, 60, 60);
-}
-.menu-list:nth-child(5):hover {
-  background: rgb(60, 253, 108);
-}
-.menu-list:nth-child(6):hover {
-  background: rgb(182, 182, 182);
-}
 
-button {
-  color: rgb(97, 97, 97);
-  padding: 8px 15px;
-  border-radius: 5px;
-  box-shadow: 5px 5px 6px -3px rgba(0, 0, 0, 0.5);
-  font-weight: 300;
-  border: none; /* 枠線を消す */
-  outline: none; /* クリックしたときに表示される枠線を消す */
-  background: transparent;
-}
 </style>
