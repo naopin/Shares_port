@@ -1,8 +1,6 @@
 <template>
   <div class="loginHome">
     <Header></Header>
- 
-    
   </div>
 </template>
 

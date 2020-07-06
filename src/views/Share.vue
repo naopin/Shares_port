@@ -1,12 +1,15 @@
 <template>
   <div class="share">
     <div>
+      <h1>動画検索</h1>
       <font>YouTube Search list</font>
     </div>
     <br />
     <input placeholder="キーワードを入力してください" v-model="keyword" />
     <button @click="search_video">検索</button>
+
     <!-- <iframe width="560" height="315" :src= {resultVideo} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+
     <div v-show="results">
       <iframe
         width="560"
@@ -47,12 +50,21 @@
         </tr>
       </table>
     </div>
-    <div class="recommend">
-      <div>
-        <h3>投稿する動画</h3>
-        {{selectMovieTitle}}
+    <div class="selectmovie">
+      <div class="recommend">
+        <div>
+          <h3>投稿する動画</h3>
+          <div class="category">
+            <h3>category</h3>
+            <select v-model="choice" @change="selectCategory">
+              <option v-for="catregory in categories" :key="catregory.name">{{catregory.name}}</option>
+            </select>
+          </div>
+          <h4>{{selectMovieTitle}}</h4>
+        </div>
+        <button @click="share()">投稿</button>
       </div>
-      <button @click="share()">投稿</button>
+
     </div>
   </div>
 </template>
@@ -68,10 +80,21 @@ export default {
   name: "SearchVideo",
   data: function() {
     return {
-      movieItems:"",
-      selectMovieTitle:"",
-      selectMovieUrl:"",
-      shareItem: "",
+
+      categories: [
+        { name: "Javascript" },
+        { name: "Vue.js" },
+        { name: "React" },
+        { name: "Angular" },
+        { name: "Node.js" },
+        { name: "Other" }
+      ],
+      choice:"",
+      selctedCategory:"",
+      movieItems: "",
+      selectMovieTitle: "",
+      selectMovieUrl: "",
+      users: "",
       selcted: "",
       resultVideo: null,
       results: null,
@@ -105,31 +128,53 @@ export default {
     },
     click: function(value) {
       this.resultVideo = `https://www.youtube.com/embed/${value.id.videoId}`;
+
+      // 選択された全ての動画情報
       this.movieItems = value;
+      // 選択された動画タイトル
       this.selectMovieTitle = this.movieItems.snippet.title;
+      // 選択された動画URL
       this.selectMovieUrl = `https://www.youtube.com/embed/${this.movieItems.id.videoId}`;
 
-    //    console.log(this.movieItems);
-    //    console.log(this.resultVideo);
+      console.log(this.movieItems);
+      //    console.log(this.resultVideo);
     },
     share: function() {
       this.$nextTick(function() {
-        firebase.auth().onAuthStateChanged(function(user) {
-          const shareItem = user;
-        let db = firebase.firestore();
-        const usersRef = db.collection("users");
-        usersRef
-          .doc(shareItem.uid)
-          .set({ mmmm: 5000000 })
-          .then(() => {
-            console.log("Success edit user.");
-          })
-          .catch(error => {
-            console.error("Error edit user: ", error);
-          });
-          console.log(shareItem);
+        const self = this;
+
+        firebase.auth().onAuthStateChanged(function() {
+          let db = firebase.firestore();
+          const sharesRef = db.collection("shares");
+          sharesRef
+            .doc(self.movieItems.id.videoId)
+            .set({
+              category: {
+                category:self.selctedCategory
+              },
+              snippet: {
+                title: self.movieItems.snippet.title,
+                description: self.movieItems.snippet.description,
+                thumbnails: {
+                  medium: {
+                    url: self.movieItems.snippet.thumbnails.medium.url
+                  }
+                }
+              }
+            })
+            .then(() => {
+              console.log("Success edit user.");
+            })
+            .catch(error => {
+              console.error("Error edit user: ", error);
+            });
         });
       });
+    },
+    selectCategory(e) {
+      this.selctedCategory = e.target.value;
+      console.log(this.selctedCategory);
+
     }
   }
 };
