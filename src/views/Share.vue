@@ -2,11 +2,14 @@
   <div class="share">
     <div>
       <h1>動画検索</h1>
+      <font>YouTube Search list</font>
     </div>
     <br />
     <input placeholder="キーワードを入力してください" v-model="keyword" />
     <button @click="search_video">検索</button>
-   
+
+    <!-- <iframe width="560" height="315" :src= {resultVideo} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+
     <div v-show="results">
       <iframe
         width="560"
@@ -47,7 +50,6 @@
         </tr>
       </table>
     </div>
-
     <div class="selectmovie">
       <div class="recommend">
         <div>
@@ -62,6 +64,7 @@
         </div>
         <button @click="share()">投稿</button>
       </div>
+
     </div>
   </div>
 </template>
@@ -77,6 +80,7 @@ export default {
   name: "SearchVideo",
   data: function() {
     return {
+
       categories: [
         { name: "Javascript" },
         { name: "Vue.js" },
@@ -124,6 +128,7 @@ export default {
     },
     click: function(value) {
       this.resultVideo = `https://www.youtube.com/embed/${value.id.videoId}`;
+
       // 選択された全ての動画情報
       this.movieItems = value;
       // 選択された動画タイトル
@@ -169,6 +174,7 @@ export default {
     selectCategory(e) {
       this.selctedCategory = e.target.value;
       console.log(this.selctedCategory);
+
     }
   }
 };
