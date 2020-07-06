@@ -27,8 +27,6 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
-
-
 }
 .modal-window {
   background: #fff;
@@ -62,13 +60,4 @@
   opacity: 0;
   transform: translateY(-100px);
 }
-/* button {
-    background: #eb516b;
-    border: none;
-    border-radius: 2px;
-    padding: 4px 16px;
-    color: #fff;
-    transition: background-color .25s;
-    cursor: pointer;
-} */
 </style>

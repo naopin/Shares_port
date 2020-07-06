@@ -1,5 +1,6 @@
 <template>
   <div class="share">
+      <router-link to="/">HOME</router-link>
     <div>
       <h1>動画検索</h1>
     </div>
@@ -119,7 +120,7 @@ export default {
         .then(function(res) {
           self.results = res.data.items;
           self.resultVideo = `https://www.youtube.com/embed/${self.results[0].id.videoId}`;
-          console.log(self.resultVideo);
+          console.log(self.results);
         });
     },
     click: function(value) {
@@ -144,12 +145,11 @@ export default {
           sharesRef
             .doc(self.movieItems.id.videoId)
             .set({
-              category: {
-                category:self.selctedCategory
-              },
+              category:self.selctedCategory,
               snippet: {
                 title: self.movieItems.snippet.title,
                 description: self.movieItems.snippet.description,
+                url:`https://www.youtube.com/embed/${self.movieItems.id.videoId}`,
                 thumbnails: {
                   medium: {
                     url: self.movieItems.snippet.thumbnails.medium.url
@@ -168,8 +168,11 @@ export default {
     },
     selectCategory(e) {
       this.selctedCategory = e.target.value;
-      console.log(this.selctedCategory);
+      // console.log(this.selctedCategory);
     }
+  },
+  click() {
+    
   }
 };
 </script>

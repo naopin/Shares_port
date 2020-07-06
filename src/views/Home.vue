@@ -29,12 +29,12 @@ export default {
     this.$nextTick(function() {
       firebase.auth().onAuthStateChanged((user)=> {
         if (user) {
-          console.log("ログイン中", user);
+          // console.log("ログイン中", user);
           this.navbar = true;
         } else {
-          console.log("ログインアウト中");
+          // console.log("ログインアウト中");
           this.navbar = false;
-          console.log(this.navbar);
+          // console.log(this.navbar);
         }
       });
     });
