@@ -93,7 +93,7 @@ export default {
               .then(() => {
                 const userInfo = firebase.auth().currentUser;
                 let db = firebase.firestore();
-                console.log(userInfo);
+                // console.log(userInfo);
                 db.collection("users")
                   .doc(userInfo.uid)
                   .set({
@@ -133,19 +133,11 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  /* position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translateY(-50%) translateX(-50%); */
   padding: 3rem;
-  /* background: radial-gradient(rgb(255, 255, 255), rgb(240, 240, 240));
-  border-radius: 5px;
-  box-shadow: 0 5px 20px -3px rgb(116, 116, 116); */
 }
 
 table {
   margin: 0 auto;
-  /* font-size: 1.6em; */
 }
 
 ::placeholder {
@@ -156,7 +148,6 @@ button {
   color: rgb(255, 255, 255);
   padding: 8px 15px;
   border-radius: 5px;
-  /* font-size: 1.6em; */
   background: #ff801a;
   box-shadow: 5px 5px 6px -3px rgba(0, 0, 0, 0.2);
   font-weight: 300;

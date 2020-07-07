@@ -68,15 +68,6 @@ export default {
       this.email = "";
       this.password = "";
     },
-    created: function() {
-      console.log("called created at login");
-    },
-    mounted: function() {
-      console.log("called mounted at login");
-    },
-    beforeDestroy: function() {
-      console.log("called beforeDestroy at login");
-    }
   }
 };
 </script>

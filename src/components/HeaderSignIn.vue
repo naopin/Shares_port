@@ -12,7 +12,7 @@
               <router-link to="/profile">PROFILE</router-link>
             </li>
             <li>
-               <button @click="logout">ログアウト</button>
+               <button class="signoutbutton" @click="logout">SIGNOUT</button>
             </li>
           </ul>
         </div>
@@ -79,8 +79,14 @@ li {
   text-decoration: none;
   padding: 1rem;
 }
+.signoutbutton {
+  color: rgb(97, 97, 97);
+  border: none; /* 枠線を消す */
+  outline: none; /* クリックしたときに表示される枠線を消す */
+  background: transparent;
+}
 
-a:hover {
+a:hover, .signoutbutton:hover {
   color: rgb(160, 160, 160);
 }
 
