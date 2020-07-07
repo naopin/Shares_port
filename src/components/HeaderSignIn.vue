@@ -18,16 +18,16 @@
         </div>
       </div>
     </nav>
-    <SelctMenu></SelctMenu>
+    <!-- <SelctMenu></SelctMenu> -->
   </header>
 </template>
 
 
 <script>
 import firebase from "firebase";
-import SelctMenu from "../components/SelctMenu"
+// import SelctMenu from "../components/SelctMenu"
 export default {
-  components: {SelctMenu},
+  // components: {SelctMenu},
   name: "Header",
   methods: {
       logout: function() {
