@@ -25,18 +25,16 @@
         </div>
       </div>
     </nav>
-    <SelctMenu></SelctMenu>
+    <!-- <SelctMenu></SelctMenu> -->
   </header>
 </template>
-
-
 <script>
-import SelctMenu from "../components/SelctMenu";
+// import SelctMenu from "../components/SelctMenu";
 import MyModal from "../components/Mymodal";
-import SignIn from "../views/SignIn";
-import SignUp from "../views/SignUp";
+import SignIn from "../components/SignIn";
+import SignUp from "../components/SignUp";
 export default {
-  components: { SelctMenu, MyModal, SignIn, SignUp },
+  components: {  MyModal, SignIn, SignUp },
   name: "Header",
   data() {
     return {

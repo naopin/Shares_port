@@ -54,9 +54,16 @@
         <div>
           <h3>投稿する動画</h3>
           <div class="category">
-            <h3>category</h3>
+            <h3>言語</h3>
             <select v-model="choice" @change="selectCategory">
               <option v-for="catregory in categories" :key="catregory.name">{{catregory.name}}</option>
+            </select>
+          </div>
+          <div class="contents">
+            <h3>コンテンツ</h3>
+            <select >
+              <option>動画</option>
+              <option value="">記事</option>
             </select>
           </div>
           <h4>{{selectMovieTitle}}</h4>
