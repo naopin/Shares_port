@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Share from '../views/Share.vue'
+import Profile from '../views/Profile.vue'
 
 
 Vue.use(VueRouter)
@@ -16,6 +17,11 @@ Vue.use(VueRouter)
     path: '/share',
     name: 'Share',
     component: Share
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile
   },
   
 ]

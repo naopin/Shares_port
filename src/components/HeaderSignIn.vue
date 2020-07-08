@@ -50,7 +50,6 @@ export default {
         
         } else {
           console.log("ログインアウト中");
-         this.$router.push("/");
         }
       });
     });
