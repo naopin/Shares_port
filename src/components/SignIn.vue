@@ -41,7 +41,7 @@ export default {
     resetPassword: function() {
       this.email = window.prompt(
         "ご登録されたメールアドレスをご入力下さい",
-        ""
+
       );
       firebase.auth().languageCode = "ja"; // 日本語に設定
       firebase

@@ -1,74 +1,80 @@
 <template>
-  <div class="share">
-      <router-link to="/">HOME</router-link>
-    <div>
-      <h1>動画検索</h1>
-    </div>
-    <br />
-    <input placeholder="キーワードを入力してください" v-model="keyword" />
-    <button @click="search_video">検索</button>
-   
-    <div v-show="results">
-      <iframe
-        width="560"
-        height="315"
-        :src="resultVideo"
-        frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      >></iframe>
-      <table>
-        <tr>
-          <th>
-            <font>No</font>
-          </th>
-          <th>
-            <font>Video</font>
-          </th>
-          <th>
-            <font>Contents</font>
-          </th>
-        </tr>
+  <div id="share">
+    <Header></Header>
+    <div class="share">
+      <div>
+        <h1 class="share_title">動画検索</h1>
+      </div>
+      <div class="search">
+        <input placeholder="キーワードを入力してください" v-model="keyword" type="search" />
+        <button @click="search_video">検索</button>
+      </div>
 
-        <tr v-for="(movie, index) in results" v-bind:key="movie.id.videoId">
-          <!-- No -->
-          <td>{{ index + 1 }}</td>
-          <!-- Video -->
-          <td @click="click(movie)">
-            <img v-bind:src="movie.snippet.thumbnails.medium.url" />
-          </td>
-          <!-- titleとdescription -->
-          <td>
-            <font>
-              <b>{{ movie.snippet.title }}</b>
-            </font>
-            <br />
-            {{ movie.snippet.description}}
-          </td>
-        </tr>
-      </table>
-    </div>
-
-    <div class="selectmovie">
-      <div class="recommend">
-        <div>
-          <h3>投稿する動画</h3>
-          <div class="category">
-            <h3>言語</h3>
-            <select v-model="choice" @change="selectCategory">
-              <option v-for="catregory in categories" :key="catregory.name">{{catregory.name}}</option>
-            </select>
-          </div>
-          <div class="contents">
-            <h3>コンテンツ</h3>
-            <select >
-              <option>動画</option>
-              <option value="">記事</option>
-            </select>
-          </div>
-          <h4>{{selectMovieTitle}}</h4>
+      <div cla v-show="results">
+        <div class="frame">
+          <iframe
+            width="560"
+            height="315"
+            :src="resultVideo"
+            frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          >></iframe>
         </div>
-        <button @click="share()">投稿</button>
+
+        <table>
+          <tr>
+            <th>
+              <font>No</font>
+            </th>
+            <th>
+              <font>Video</font>
+            </th>
+            <th>
+              <font>Contents</font>
+            </th>
+          </tr>
+
+          <tr v-for="(movie, index) in results" v-bind:key="movie.id.videoId">
+            <!-- No -->
+            <td>{{ index + 1 }}</td>
+            <!-- Video -->
+            <td @click="click(movie)">
+              <img v-bind:src="movie.snippet.thumbnails.medium.url" />
+            </td>
+            <!-- titleとdescription -->
+            <td>
+              <font>
+                <b>{{ movie.snippet.title }}</b>
+              </font>
+              <br />
+              {{ movie.snippet.description}}
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="selectmovie">
+        <div class="recommend">
+          <div>
+            <h3>投稿する動画</h3>
+            <div class="category">
+              <h3>言語</h3>
+              <select v-model="choice" @change="selectCategory">
+                <option v-for="catregory in categories" :key="catregory.name">{{catregory.name}}</option>
+              </select>
+            </div>
+            <div class="contents">
+              <h3>コンテンツ</h3>
+              <select>
+                <option>動画</option>
+                <option value>記事</option>
+              </select>
+            </div>
+            <h4>{{selectMovieTitle}}</h4>
+          </div>
+          <button @click="share()">投稿</button>
+        </div>
       </div>
     </div>
   </div>
@@ -76,14 +82,14 @@
 
 <script>
 import axios from "axios";
-
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import Header from "../components/HeaderSignIn";
 
 export default {
-  name: "SearchVideo",
-  data: function() {
+  components: { Header },
+  data() {
     return {
       categories: [
         { name: "Javascript" },
@@ -93,8 +99,8 @@ export default {
         { name: "Node.js" },
         { name: "Other" }
       ],
-      choice:"",
-      selctedCategory:"",
+      choice: "",
+      selctedCategory: "",
       movieItems: "",
       selectMovieTitle: "",
       selectMovieUrl: "",
@@ -142,21 +148,24 @@ export default {
       console.log(this.movieItems);
       //    console.log(this.resultVideo);
     },
-    share: function() {
+    share() {
       this.$nextTick(function() {
         const self = this;
-
         firebase.auth().onAuthStateChanged(function() {
+          const user = firebase.auth().currentUser;
+
           let db = firebase.firestore();
           const sharesRef = db.collection("shares");
           sharesRef
             .doc(self.movieItems.id.videoId)
             .set({
-              category:self.selctedCategory,
+              userId:user.uid,
+              category: self.selctedCategory,
               snippet: {
                 title: self.movieItems.snippet.title,
                 description: self.movieItems.snippet.description,
-                url:`https://www.youtube.com/embed/${self.movieItems.id.videoId}`,
+                url: `https://www.youtube.com/embed/${self.movieItems.id.videoId}`,
+                movieId: self.movieItems.id.videoId,
                 thumbnails: {
                   medium: {
                     url: self.movieItems.snippet.thumbnails.medium.url
@@ -178,15 +187,15 @@ export default {
       // console.log(this.selctedCategory);
     }
   },
-  click() {
-    
-  }
 };
 </script>
 
 <style scoped>
 .share {
   font-size: 2em;
+  margin: 2em 2em;
+  box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid #eee;
 }
 table {
   border: solid 2px #a7a7a7; /*表全体を線で囲う*/
@@ -200,5 +209,20 @@ table th {
 table td {
   background: #fcfcfc;
   border: dashed 1px #a7a7a7;
+}
+
+.share_title {
+  text-align: center;
+}
+
+.search, .frame {
+  text-align: center;
+}
+.search {
+  margin-bottom: 1em;
+}
+
+.search input {
+  width: 50%;
 }
 </style>
