@@ -1,40 +1,19 @@
 <template>
   <div id="profile">
-    <!-- <Header></Header> -->
-    <div class="profile_modifies">
-      <div class="profile_title">
-        <h1>ユーザー情報の編集</h1>
-      </div>
+    <Header></Header>
+    <div class="profile">
       <div class="profile_modify">
-        <div class="current_user_information" v-if="displayUsers">
-          <div class="user_name">
-            <h3>ユーザー名</h3>
-            <h4>{{users.displayName}}</h4>
-          </div>
-          <div class="user_email">
-            <h3>メールアドレス</h3>
-            <h4>{{users.email}}</h4>
-          </div>
-          <button @click="profilelModify()">プロフィール変更</button>
-        </div>
-        <div class="edit_profile" v-if="editProfile">
-          <h3>ユーザー名</h3>
-          <h4>{{users.displayName}}</h4>
-          <div><input type="text" @input="userNameModify" /></div>
-          <div><button @click="saveUserName()">変更</button></div>
-          
+        <ProfileModify></ProfileModify>
+      </div>
 
-          <h3>メールアドレス</h3>
-          <h4>{{users.email}}</h4>
-          <input type="text" @input="emailModify" />
-          <div class="input">
-            <div><input type="text" placeholder="現在のメールアドレスを入力してください" @input="pastEmail" /></div>
-            <div><input type="text" placeholder="パスワードを入力してください" @input="pastPassword" /></div>
+      <div class="movie_history">
+        <h1 class="movie_history_title">投稿履歴</h1>
+        <div class="childItems" v-for="item in allHistoryMovie" :key="item.snippet.title">
+          <div class="history_cards">
+            <img class="thumbnails" v-bind:src="item.snippet.thumbnails.medium.url" />
+            <h2>{{item.snippet.title}}</h2>
           </div>
-
-          <div><button @click="saveEmail()">変更</button></div>
-          <div><button @click="cancel()">戻る</button></div>
-          
+          <button class="delete_btn" @click="deleteBtn(item)">削除</button>
         </div>
       </div>
     </div>
@@ -42,132 +21,122 @@
 </template>
 
 <script>
-import firebase from "firebase";
-// import "firebase/auth";
-// import "firebase/firestore";
-// import Header from "../components/HeaderSignIn";
+import ProfileModify from "../components/ProfileModify";
+import Header from "../components/HeaderSignIn";
+import "firebase/auth";
+import "firebase/firestore";
+import { firebaseApp } from "../main";
+import * as firebase from "firebase/app";
+
 export default {
-  // components: { Header },
+  components: { Header, ProfileModify },
   data() {
     return {
-      users: [],
-      displayUsers: true,
-      editProfile: false,
-      NewUserName: {},
-      newEmail: {},
-      email: "",
-      password: ""
+      allHistoryMovie: []
     };
   },
+
   created() {
     this.$nextTick(function() {
       const self = this;
-      // ログインユーザーを参照
-      firebase.auth().onAuthStateChanged(function(user) {
+      firebase.auth().onAuthStateChanged(user => {
         if (user) {
-          self.users = user;
-          console.log(self.users);
+          firebaseApp
+            .firestore()
+            .collection("shares")
+            //firestoreのすべてdoc取得
+            .onSnapshot(querySnapshot => {
+              let videos = [];
+              querySnapshot.forEach(doc => {
+                videos.push(doc.data());
+              });
+              let filterUid = [];
+              //ログインユーザーの投稿のみ(doc)取得
+              filterUid = videos.filter(item => {
+                return item.userId === user.uid;
+              });
+              self.allHistoryMovie = filterUid;
+            });
         } else {
-          console.log("ログインユーザーを参照できていません");
+          self.$router.push("/");
         }
       });
     });
   },
   methods: {
-    profilelModify() {
-      this.displayUsers = false;
-      this.editProfile = true;
-    },
-    cancel() {
-      this.editProfile = false;
-      this.displayUsers = true;
-    },
-    //入力されたメール
-    pastEmail(e) {
-      this.email = e.target.value;
-    },
-    //入力されたパスワード
-    pastPassword(e) {
-      this.password = e.target.value;
-    },
-    //変更されたユーザー名を取得
-    userNameModify(e) {
-      this.NewUserName = e.target.value;
-      console.log(this.NewUserName);
-    },
-    //Authユーザー名を変更
-    saveUserName() {
-      if (this.NewUserName) {
-        firebase
-          .auth()
-          //authのdisplaynameを変更
-          .currentUser.updateProfile({
-            displayName: this.NewUserName
-          })
-          .then(() => {
-            this.users = {
-              displayName: firebase.auth().currentUser.displayName,
-              email: firebase.auth().currentUser.email
-            };
-          })
-          .catch(error => {
-            console.log("Error edit username: ", error);
-          });
-        this.cancel();
-      } else {
-        alert("変更が確認されません");
-      }
-    },
-    //変更されたメールアドレスを取得
-    emailModify(e) {
-      console.log(e.target.value);
-      this.newEmail = e.target.value;
-    },
-    //firebaseのメールを更新
-    saveEmail() {
-      if (this.newEmail) {
-        firebase
-          .auth()
-          .signInWithEmailAndPassword(this.email, this.password)
-          .then(() => {
-            firebase
-              .auth()
-              .currentUser.updateEmail(this.newEmail)
-              .then(() => {
-                this.users = {
-                  displayName: firebase.auth().currentUser.displayName,
-                  email: firebase.auth().currentUser.email
-                };
-                console.log(firebase.auth().currentUser);
-                this.cancel();
-              })
-              .catch(error => {
-                console.log("authメール変更失敗", error);
-              });
-
-            // this.$router.push("/");
-          })
-          .catch(error => {
-            alert(error.message);
-          });
-      } else {
-        alert("変更が確認されません");
-      }
+    deleteBtn(value) {
+      firebase
+        .firestore()
+        .collection("shares")
+        .doc(value.snippet.movieId)
+        .delete()
+        .then(() => {
+          console.log("履歴", this.allHistoryMovie);
+        })
+        .catch(error => {
+          console.error("Error removing document: ", error);
+        });
     }
   }
 };
 </script>
 
 <style scoped>
-.profile_modifies {
-  margin: 3em 3em;
-  font-size: 2em;
+.profile {
+  margin: 2em 2em;
   padding: 2em 1em;
   box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.2);
   border: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+}
+h2 {
+  padding: 1em;
+}
+.movie_history_title {
+  font-size: 4em;
+  text-align: center;
 }
 
-::placeholder {
-  font-size: 0.6em;
+.profile_modify {
+  width: 50%;
+}
+.movie_history {
+  width: 50%;
+}
+
+.childItems {
+  width: 70%;
+  box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid #eee;
+  font-size: 1.2em;
+  margin: 0 auto;
+  margin-bottom: 3em;
+}
+
+.delete_btn {
+  color: #eee;
+  background: rgb(255, 13, 13);
+  padding: 0.5em 1em;
+  font-size: 1.3em;
+  font-weight: bold;
+  border-radius: 6px;
+  border-bottom: solid 4px #6b6b6b;
+  margin: 0.5em;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+}
+.delete_btn:hover {
+  background: rgb(255, 103, 103);
+}
+
+.delete_btn:active {
+  -webkit-transform: translateY(3px);
+  transform: translateY(3px); /*下に動く*/
+  border-bottom: none; /*線を消す*/
 }
 </style>

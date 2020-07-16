@@ -1,20 +1,31 @@
 <template>
   <div id="contents">
-    <Search></Search>
     <div id="content">
       <!-- Javascript -->
       <transition name="fade">
         <div v-if="value == 'JavascriptValue'">
+          <!-- モーダル -->
           <MyModal @close="javascriptCloseModal()" v-if="jsModal">
             <div class="frames">
               <iframe width="100%" height="100%" :src="jsIframe"></iframe>
             </div>
           </MyModal>
-          <div class="parentItems">
-            <div class="childItems" v-for="item in jsMapitems" :key="item.url">
-              <div @click="javascriptOpenModal(), clickJsItem(item)">
-                <img v-bind:src="item.thumbnail" />
-                <h2>{{item.title}}</h2>
+          <div>
+            <!-- 検索機能 -->
+            <div class="forms">
+              <form>
+                <input type="search" v-model="jsKeyword" placeholder="キーワードを入力してください" />
+              </form>
+            </div>
+            <div class="parentItems">
+              <div class="childItems" v-for="item in jsReserch" :key="item.url">
+                <div @click="javascriptOpenModal(), clickJsItem(item)">
+                  <img v-bind:src="item.thumbnail" />
+                  <h2>{{item.title}}</h2>
+                  <div class="username">
+                    <p>投稿者:{{item.userName}}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -23,13 +34,20 @@
       <!-- vue.js -->
       <transition name="fade">
         <div v-if="value == 'VueValue'">
+          <!-- モーダル -->
           <MyModal @close="vueCloseModal()" v-if="vueModal">
             <div class="frames">
               <iframe width="100%" height="100%" :src="vueIframe"></iframe>
             </div>
           </MyModal>
+            <!-- 検索機能 -->
+            <div class="forms">
+              <form>
+                <input type="search" v-model="vueKeyword" placeholder="キーワードを入力してください" />
+              </form>
+            </div>
           <div class="parentItems">
-            <div class="childItems" v-for="item in vueMapitems" :key="item.url">
+            <div class="childItems" v-for="item in vueReserch" :key="item.url">
               <div @click="vueOpenModal(), clickVueItem(item)">
                 <img v-bind:src="item.thumbnail" />
                 <h2>{{item.title}}</h2>
@@ -41,13 +59,19 @@
       <!-- React -->
       <transition name="fade">
         <div v-if="value == 'ReacValue'">
-            <MyModal @close="reactCloseModal()" v-if="reactModal">
+          <MyModal @close="reactCloseModal()" v-if="reactModal">
             <div class="frames">
               <iframe width="100%" height="100%" :src="reactIframe"></iframe>
             </div>
           </MyModal>
+           <!-- 検索機能 -->
+            <div class="forms">
+              <form>
+                <input type="search" v-model="reactKeyword" placeholder="キーワードを入力してください" />
+              </form>
+            </div>
           <div class="parentItems">
-            <div class="childItems" v-for="item in reactMapitems" :key="item.url">
+            <div class="childItems" v-for="item in reactReserch" :key="item.url">
               <div @click="reactOpenModal(), clickReactItem(item)">
                 <img v-bind:src="item.thumbnail" />
                 <h2>{{item.title}}</h2>
@@ -59,13 +83,19 @@
       <!-- Angular -->
       <transition name="fade">
         <div v-if="value == 'AngularValue'">
-       <MyModal @close="angularCloseModal()" v-if="angularModal">
+          <MyModal @close="angularCloseModal()" v-if="angularModal">
             <div class="frames">
               <iframe width="100%" height="100%" :src="angularIframe"></iframe>
             </div>
           </MyModal>
+          <!-- 検索機能 -->
+            <div class="forms">
+              <form>
+                <input type="search" v-model="angularKeyword" placeholder="キーワードを入力してください" />
+              </form>
+            </div>
           <div class="parentItems">
-            <div class="childItems" v-for="item in angularMapitems" :key="item.url">
+            <div class="childItems" v-for="item in angularReserch" :key="item.url">
               <div @click="angularOpenModal(), clickAngularItem(item)">
                 <img v-bind:src="item.thumbnail" />
                 <h2>{{item.title}}</h2>
@@ -82,8 +112,14 @@
               <iframe width="100%" height="100%" :src="nodeIframe"></iframe>
             </div>
           </MyModal>
+            <!-- 検索機能 -->
+            <div class="forms">
+              <form>
+                <input type="search" v-model="nodeKeyword" placeholder="キーワードを入力してください" />
+              </form>
+            </div>
           <div class="parentItems">
-            <div class="childItems" v-for="item in nodeMapitems" :key="item.url">
+            <div class="childItems" v-for="item in nodeReserch" :key="item.url">
               <div @click="nodeOpenModal(), clickNodeItem(item)">
                 <img v-bind:src="item.thumbnail" />
                 <h2>{{item.title}}</h2>
@@ -100,8 +136,14 @@
               <iframe width="100%" height="100%" :src="otherIframe"></iframe>
             </div>
           </MyModal>
+             <!-- 検索機能 -->
+            <div class="forms">
+              <form>
+                <input type="search" v-model="otherKeyword" placeholder="キーワードを入力してください" />
+              </form>
+            </div>
           <div class="parentItems">
-            <div class="childItems" v-for="item in otherMapitems" :key="item.url">
+            <div class="childItems" v-for="item in otherReserch" :key="item.url">
               <div @click="otherOpenModal(), clickOtherItem(item)">
                 <img v-bind:src="item.thumbnail" />
                 <h2>{{item.title}}</h2>
@@ -119,20 +161,28 @@ import "firebase/auth";
 import "firebase/firestore";
 import { firebaseApp } from "../main";
 import MyModal from "../components/Mymodal";
-import Search from "../components/Search";
+// import Search from "../components/Search";
+
 export default {
-  components: { MyModal, Search },
+  components: { MyModal },
   props: ["value"],
   data() {
     return {
       videoItems: [],
       jsMapitems: "",
-      vueMapitems:"",
-      reactMapitems:"",
-      angularMapitems:"",
-      nodeMapitems:"",
-      otherMapitems:"",
-     //category別Modal
+      vueMapitems: "",
+      reactMapitems: "",
+      angularMapitems: "",
+      nodeMapitems: "",
+      otherMapitems: "",
+      //検索機能キーワード
+      jsKeyword: "",
+      vueKeyword:"",
+      reactKeyword:"",
+      angularKeyword: "",
+      nodeKeyword:"",
+      otherKeyword:"",
+      //category別Modal
       jsModal: false,
       vueModal: false,
       reactModal: false,
@@ -140,19 +190,19 @@ export default {
       nodeModal: false,
       otherModal: false,
       //category別の動画
-      javascriptItems:[],
-      vueItems:[],
-      reactItems:[],
-      angularItems:[],
-      nodeItems:[],
-      otherItems:[],
+      javascriptItems: [],
+      vueItems: [],
+      reactItems: [],
+      angularItems: [],
+      nodeItems: [],
+      otherItems: [],
       //category別Iframe
       jsIframe: "",
       vueIframe: "",
       reactIframe: "",
       angularIframe: "",
       nodeIframe: "",
-      otherIframe: "",
+      otherIframe: ""
     };
   },
   created() {
@@ -174,7 +224,7 @@ export default {
           self.vueItems = self.videoItems.filter(item => {
             return item.category === "Vue.js";
           });
-              //CategoryがReactの動画を取得
+          //CategoryがReactの動画を取得
           self.reactItems = self.videoItems.filter(item => {
             return item.category === "React";
           });
@@ -192,10 +242,11 @@ export default {
           });
           // Javascript初期値フレーム
           self.jsIframe = self.javascriptItems[0].snippet.url;
-          
+
           //jsMap
           self.jsMapitems = self.javascriptItems.map(elm => {
             return {
+              userName: elm.userName,
               url: elm.snippet.url,
               title: elm.snippet.title,
               description: elm.snippet.description,
@@ -326,8 +377,75 @@ export default {
     },
     otherCloseModal() {
       this.otherModal = false;
+    }
+  },
+  computed: {
+    //javascript検索機能
+    jsReserch: function() {
+      let jsMapitems = [];
+      for (let i in this.jsMapitems) {
+        const jsMapitem = this.jsMapitems[i];
+        if (jsMapitem.title.indexOf(this.jsKeyword) !== -1) {
+          jsMapitems.push(jsMapitem);
+        }
+      }
+      return jsMapitems;
     },
-
+     //vue検索機能
+     vueReserch: function() {
+      let vueMapitems = [];
+      for (let i in this.vueMapitems) {
+        const vueMapitem = this.vueMapitems[i];
+        if (vueMapitem.title.indexOf(this.vueKeyword) !== -1) {
+          vueMapitems.push(vueMapitem);
+        }
+      }
+      return vueMapitems;
+    },
+    //react検索機能
+     reactReserch: function() {
+      let reactMapitems = [];
+      for (let i in this.reactMapitems) {
+        const reactMapitem = this.reactMapitems[i];
+        if (reactMapitem.title.indexOf(this.reactKeyword) !== -1) {
+          reactMapitems.push(reactMapitem);
+        }
+      }
+      return reactMapitems;
+    },
+    //angular検索機能
+     angularReserch: function() {
+      let angularMapitems = [];
+      for (let i in this.angularMapitems) {
+        const angularMapitem = this.angularMapitems[i];
+        if (angularMapitem.title.indexOf(this.angularKeyword) !== -1) {
+          angularMapitems.push(angularMapitem);
+        }
+      }
+      return angularMapitems;
+    },
+    //node検索機能
+     nodeReserch: function() {
+      let nodeMapitems = [];
+      for (let i in this.nodeMapitems) {
+        const nodeMapitem = this.nodeMapitems[i];
+        if (nodeMapitem.title.indexOf(this.nodeKeyword) !== -1) {
+          nodeMapitems.push(nodeMapitem);
+        }
+      }
+      return nodeMapitems;
+    },
+    //other検索機能
+     otherReserch: function() {
+      let otherMapitems = [];
+      for (let i in this.otherMapitems) {
+        const otherMapitem = this.otherMapitems[i];
+        if (otherMapitem.title.indexOf(this.otherKeyword) !== -1) {
+          otherMapitems.push(otherMapitem);
+        }
+      }
+      return otherMapitems;
+    },
   }
 };
 </script>
@@ -342,8 +460,17 @@ export default {
 }
 
 h2 {
-  padding: 1em;
+  padding: 0.5em 1em 4.5em 1em;
 }
+
+.username {
+  font-size: 1.5em;
+  font-weight: bold;
+  position: absolute;
+  bottom: 0;
+  margin-left: 0.5em;
+}
+
 .frames {
   width: 90em;
   height: 50em;
@@ -359,6 +486,7 @@ h2 {
   margin-bottom: 2em;
   box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.2);
   border: 1px solid #eee;
+  position: relative;
 }
 .fade-enter {
   transform: translate(-350px, 0);
@@ -380,5 +508,18 @@ h2 {
 }
 .fade-leave-active {
   transition: all 0.3s 0s ease;
+}
+
+.forms {
+  margin: 0 auto;
+  width: 35%;
+}
+form {
+  font-size: 2em;
+  margin: 1.5em 0;
+}
+
+form input {
+  width: 100%;
 }
 </style>
