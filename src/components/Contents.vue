@@ -40,17 +40,20 @@
               <iframe width="100%" height="100%" :src="vueIframe"></iframe>
             </div>
           </MyModal>
-            <!-- 検索機能 -->
-            <div class="forms">
-              <form>
-                <input type="search" v-model="vueKeyword" placeholder="キーワードを入力してください" />
-              </form>
-            </div>
+          <!-- 検索機能 -->
+          <div class="forms">
+            <form>
+              <input type="search" v-model="vueKeyword" placeholder="キーワードを入力してください" />
+            </form>
+          </div>
           <div class="parentItems">
             <div class="childItems" v-for="item in vueReserch" :key="item.url">
               <div @click="vueOpenModal(), clickVueItem(item)">
                 <img v-bind:src="item.thumbnail" />
                 <h2>{{item.title}}</h2>
+                <div class="username">
+                  <p>投稿者:{{item.userName}}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -64,17 +67,20 @@
               <iframe width="100%" height="100%" :src="reactIframe"></iframe>
             </div>
           </MyModal>
-           <!-- 検索機能 -->
-            <div class="forms">
-              <form>
-                <input type="search" v-model="reactKeyword" placeholder="キーワードを入力してください" />
-              </form>
-            </div>
+          <!-- 検索機能 -->
+          <div class="forms">
+            <form>
+              <input type="search" v-model="reactKeyword" placeholder="キーワードを入力してください" />
+            </form>
+          </div>
           <div class="parentItems">
             <div class="childItems" v-for="item in reactReserch" :key="item.url">
               <div @click="reactOpenModal(), clickReactItem(item)">
                 <img v-bind:src="item.thumbnail" />
                 <h2>{{item.title}}</h2>
+                <div class="username">
+                  <p>投稿者:{{item.userName}}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -89,16 +95,19 @@
             </div>
           </MyModal>
           <!-- 検索機能 -->
-            <div class="forms">
-              <form>
-                <input type="search" v-model="angularKeyword" placeholder="キーワードを入力してください" />
-              </form>
-            </div>
+          <div class="forms">
+            <form>
+              <input type="search" v-model="angularKeyword" placeholder="キーワードを入力してください" />
+            </form>
+          </div>
           <div class="parentItems">
             <div class="childItems" v-for="item in angularReserch" :key="item.url">
               <div @click="angularOpenModal(), clickAngularItem(item)">
                 <img v-bind:src="item.thumbnail" />
                 <h2>{{item.title}}</h2>
+                <div class="username">
+                  <p>投稿者:{{item.userName}}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -112,17 +121,20 @@
               <iframe width="100%" height="100%" :src="nodeIframe"></iframe>
             </div>
           </MyModal>
-            <!-- 検索機能 -->
-            <div class="forms">
-              <form>
-                <input type="search" v-model="nodeKeyword" placeholder="キーワードを入力してください" />
-              </form>
-            </div>
+          <!-- 検索機能 -->
+          <div class="forms">
+            <form>
+              <input type="search" v-model="nodeKeyword" placeholder="キーワードを入力してください" />
+            </form>
+          </div>
           <div class="parentItems">
             <div class="childItems" v-for="item in nodeReserch" :key="item.url">
               <div @click="nodeOpenModal(), clickNodeItem(item)">
                 <img v-bind:src="item.thumbnail" />
                 <h2>{{item.title}}</h2>
+                <div class="username">
+                  <p>投稿者:{{item.userName}}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -136,17 +148,20 @@
               <iframe width="100%" height="100%" :src="otherIframe"></iframe>
             </div>
           </MyModal>
-             <!-- 検索機能 -->
-            <div class="forms">
-              <form>
-                <input type="search" v-model="otherKeyword" placeholder="キーワードを入力してください" />
-              </form>
-            </div>
+          <!-- 検索機能 -->
+          <div class="forms">
+            <form>
+              <input type="search" v-model="otherKeyword" placeholder="キーワードを入力してください" />
+            </form>
+          </div>
           <div class="parentItems">
             <div class="childItems" v-for="item in otherReserch" :key="item.url">
               <div @click="otherOpenModal(), clickOtherItem(item)">
                 <img v-bind:src="item.thumbnail" />
                 <h2>{{item.title}}</h2>
+                <div class="username">
+                  <p>投稿者:{{item.userName}}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -177,11 +192,11 @@ export default {
       otherMapitems: "",
       //検索機能キーワード
       jsKeyword: "",
-      vueKeyword:"",
-      reactKeyword:"",
+      vueKeyword: "",
+      reactKeyword: "",
       angularKeyword: "",
-      nodeKeyword:"",
-      otherKeyword:"",
+      nodeKeyword: "",
+      otherKeyword: "",
       //category別Modal
       jsModal: false,
       vueModal: false,
@@ -256,6 +271,7 @@ export default {
           //vueMap
           self.vueMapitems = self.vueItems.map(elm => {
             return {
+              userName: elm.userName,
               url: elm.snippet.url,
               title: elm.snippet.title,
               description: elm.snippet.description,
@@ -265,6 +281,7 @@ export default {
           //ReactMap
           self.reactMapitems = self.reactItems.map(elm => {
             return {
+              userName: elm.userName,
               url: elm.snippet.url,
               title: elm.snippet.title,
               description: elm.snippet.description,
@@ -274,6 +291,7 @@ export default {
           //AngularMap
           self.angularMapitems = self.angularItems.map(elm => {
             return {
+              userName: elm.userName,
               url: elm.snippet.url,
               title: elm.snippet.title,
               description: elm.snippet.description,
@@ -283,6 +301,7 @@ export default {
           //nodeMap
           self.nodeMapitems = self.nodeItems.map(elm => {
             return {
+              userName: elm.userName,
               url: elm.snippet.url,
               title: elm.snippet.title,
               description: elm.snippet.description,
@@ -292,6 +311,7 @@ export default {
           //otherMap
           self.otherMapitems = self.otherItems.map(elm => {
             return {
+              userName: elm.userName,
               url: elm.snippet.url,
               title: elm.snippet.title,
               description: elm.snippet.description,
@@ -299,7 +319,7 @@ export default {
             };
           });
 
-          console.log(self.otherItems);
+          // console.log(self.otherItems);
           // console.log(self.videoItems);
         });
     });
@@ -307,7 +327,6 @@ export default {
   methods: {
     //Js動画のvalueを取得
     clickJsItem(value) {
-      console.log(value);
       this.jsIframe = value.url;
     },
     //javascriptModal
@@ -320,7 +339,7 @@ export default {
 
     //vue動画のvalueを取得
     clickVueItem(value) {
-      console.log(value);
+      // console.log(value);
       this.vueIframe = value.url;
     },
     //vueModal
@@ -332,7 +351,7 @@ export default {
     },
     //react動画のvalueを取得
     clickReactItem(value) {
-      console.log(value);
+      // console.log(value);
       this.reactIframe = value.url;
     },
     //reactModal
@@ -344,7 +363,6 @@ export default {
     },
     //angular動画のvalueを取得
     clickAngularItem(value) {
-      console.log(value);
       this.angularIframe = value.url;
     },
     //angularModal
@@ -356,7 +374,6 @@ export default {
     },
     //node動画のvalueを取得
     clickNodeItem(value) {
-      console.log(value);
       this.nodeIframe = value.url;
     },
     //nodeModal
@@ -368,7 +385,6 @@ export default {
     },
     //other動画のvalueを取得
     clickOtherItem(value) {
-      console.log(value);
       this.otherIframe = value.url;
     },
     //otherModal
@@ -391,8 +407,8 @@ export default {
       }
       return jsMapitems;
     },
-     //vue検索機能
-     vueReserch: function() {
+    //vue検索機能
+    vueReserch: function() {
       let vueMapitems = [];
       for (let i in this.vueMapitems) {
         const vueMapitem = this.vueMapitems[i];
@@ -403,7 +419,7 @@ export default {
       return vueMapitems;
     },
     //react検索機能
-     reactReserch: function() {
+    reactReserch: function() {
       let reactMapitems = [];
       for (let i in this.reactMapitems) {
         const reactMapitem = this.reactMapitems[i];
@@ -414,7 +430,7 @@ export default {
       return reactMapitems;
     },
     //angular検索機能
-     angularReserch: function() {
+    angularReserch: function() {
       let angularMapitems = [];
       for (let i in this.angularMapitems) {
         const angularMapitem = this.angularMapitems[i];
@@ -425,7 +441,7 @@ export default {
       return angularMapitems;
     },
     //node検索機能
-     nodeReserch: function() {
+    nodeReserch: function() {
       let nodeMapitems = [];
       for (let i in this.nodeMapitems) {
         const nodeMapitem = this.nodeMapitems[i];
@@ -436,7 +452,7 @@ export default {
       return nodeMapitems;
     },
     //other検索機能
-     otherReserch: function() {
+    otherReserch: function() {
       let otherMapitems = [];
       for (let i in this.otherMapitems) {
         const otherMapitem = this.otherMapitems[i];
@@ -445,7 +461,7 @@ export default {
         }
       }
       return otherMapitems;
-    },
+    }
   }
 };
 </script>
@@ -477,7 +493,7 @@ h2 {
 }
 .parentItems {
   display: flex;
-  justify-content: center;
+ 
   flex-wrap: wrap;
   justify-content: space-between;
 }
@@ -487,6 +503,7 @@ h2 {
   box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.2);
   border: 1px solid #eee;
   position: relative;
+  cursor: pointer;
 }
 .fade-enter {
   transform: translate(-350px, 0);
