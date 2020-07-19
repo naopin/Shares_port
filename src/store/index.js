@@ -5,8 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    value: "JavascriptValue",
   },
   mutations: {
+    changeValue(state, value) {
+      state.value = value
+    },
   },
   actions: {
   },

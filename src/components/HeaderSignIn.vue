@@ -21,16 +21,13 @@
         </div>
       </div>
     </nav>
-    <!-- <SelctMenu></SelctMenu> -->
   </header>
 </template>
 
 
 <script>
 import firebase from "firebase";
-// import SelctMenu from "../components/SelctMenu"
 export default {
-  // components: {SelctMenu},
   name: "Header",
   methods: {
     logout: function() {
@@ -45,18 +42,18 @@ export default {
         });
     }
   },
-  created() {
-    this.$nextTick(function() {
-      firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-          console.log("ログイン中", user);
-        } else {
-          console.log("ログインアウト中");
-        }
-      });
-    });
-    // console.log(this.navbar); // =null
-  }
+  // created() {
+  //   this.$nextTick(function() {
+  //     firebase.auth().onAuthStateChanged(user => {
+  //       if (user) {
+  //         // console.log("ログイン中", user);
+  //       } else {
+  //         // console.log("ログインアウト中");
+  //       }
+  //     });
+  //   });
+  //   // console.log(this.navbar); // =null
+  // }
 };
 </script>
 
