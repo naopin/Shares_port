@@ -3,7 +3,7 @@
     <nav>
       <div id="header">
         <div class="navbar">
-          <p class="navbar_log">Shares</p>
+          <router-link class="navbar_log" to="/">Shares</router-link>
           <ul>
             <li>
               <router-link to="/">HOME</router-link>
@@ -41,19 +41,7 @@ export default {
           alert(error.message);
         });
     }
-  },
-  // created() {
-  //   this.$nextTick(function() {
-  //     firebase.auth().onAuthStateChanged(user => {
-  //       if (user) {
-  //         // console.log("ログイン中", user);
-  //       } else {
-  //         // console.log("ログインアウト中");
-  //       }
-  //     });
-  //   });
-  //   // console.log(this.navbar); // =null
-  // }
+  }
 };
 </script>
 

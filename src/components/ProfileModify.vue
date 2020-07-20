@@ -5,28 +5,29 @@
     </div>
     <div class="profile_modify">
       <div class="current_user_information" v-if="displayUsers">
-        <div class="user_name">
+        <div class="profile_icon">
+          <font-awesome-icon size="7x" :icon="['fas', 'user']" />
+        </div>
+        <div class="user">
           <h3>ユーザー名</h3>
-          <h4>{{users.displayName}}</h4>
-        </div>
-        <div class="user_email">
+          <p>{{users.displayName}}</p>
           <h3>メールアドレス</h3>
-          <h4>{{users.email}}</h4>
+          <p>{{users.email}}</p>
+          <button @click="profilelModify()">プロフィール変更</button>
         </div>
-        <button @click="profilelModify()">プロフィール変更</button>
       </div>
       <div class="edit_profile" v-if="editProfile">
         <h3>ユーザー名</h3>
-        <h4>{{users.displayName}}</h4>
+        <p>{{users.displayName}}</p>
         <div>
           <input type="text" @input="userNameModify" />
         </div>
-        <div>
+        <div class="modify_btn">
           <button @click="saveUserName()">変更</button>
         </div>
 
         <h3>メールアドレス</h3>
-        <h4>{{users.email}}</h4>
+        <p>{{users.email}}</p>
         <input type="text" @input="emailModify" />
         <div class="input">
           <div>
@@ -37,10 +38,10 @@
           </div>
         </div>
 
-        <div>
+        <div class="modify_btn">
           <button @click="saveEmail()">変更</button>
         </div>
-        <div>
+        <div class="back_btn">
           <button @click="cancel()">戻る</button>
         </div>
       </div>
@@ -170,9 +171,104 @@ export default {
   text-align: center;
 }
 .profile_modify {
-  width: 60%;
-  font-size: 2.5em;
+  width: 70%;
+  font-size: 2em;
+  cursor: pointer;
+}
+
+.current_user_information {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.profile_modify {
   margin: 0 auto;
+}
+
+.profile_icon {
+  color: rgb(95, 95, 95);
+}
+
+button {
+  color: rgb(255, 255, 255);
+  padding: 0.5em 1em;
+  font-weight: bold;
+  border-radius: 6px;
+  border-bottom: solid 4px #6b6b6b;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  margin-top: 0.5em;
+  font-size: 0.8em;
+}
+.user button,
+.back_btn button {
+  background: rgb(66, 94, 255);
+}
+
+.modify_btn button {
+  background: rgb(255, 13, 13);
+}
+.edit_profile .modify_btn {
+  margin-bottom: 1em;
+}
+
+.modify_btn button:hover {
+  background: rgb(255, 103, 103);
+}
+
+.user button:hover,
+.back_btn button:hover {
+  background: rgb(103, 118, 255);
+}
+
+.modify_btn button:active,
+.user button:active,
+.back_btn button:active {
+  -webkit-transform: translateY(3px);
+  transform: translateY(3px); /*下に動く*/
+  border-bottom: none; /*線を消す*/
+}
+
+@media screen and (max-width: 1041px) {
+  .profile_title h1 {
+    font-size: 3em;
+  }
+  .profile_icon,
+  .user {
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .profile_title h1 {
+    font-size: 2em;
+  }
+  .profile_modify {
+  font-size: 1.6em;
+}
+::placeholder {
+  font-size: 0.3em;
+}
+button {
+    padding: 0.4em 0.8em;
+    font-size: 0.8em;
+  }
+
+}
+
+@media screen and (max-width: 375px) {
+  .profile_title h1 {
+    font-size: 1.8em;
+  }
+  .profile_modify {
+  font-size: 1.4em;
+}
+
 }
 
 </style>

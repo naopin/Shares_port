@@ -29,17 +29,58 @@ export default {
   box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.2);
   border: 1px solid #eee;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 .profile_modify {
-  width: 50%;
-  box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.2);
+  width: 46%;
+  box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.2);
   border: 1px solid #eee;
+  background: #fafafa;
+  margin: 1em;
+  padding-bottom:2em ;
 }
 .movie_history {
-  width: 50%;
-  box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.2);
+  width: 46%;
+  box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.2);
   border: 1px solid #eee;
+  background: #fafafa;
+  margin: 1em;
 }
 
+@media screen and (max-width: 690px) {
+    .movie_history {
+    width: 70%;
+  }
+
+  .profile_modify {
+    width: 70%;
+  }
+}
+
+/* @media screen and (max-width: 1062px) {
+  .movie_history {
+    width: 43%;
+  }
+  .profile_modify {
+    width: 43%;
+  }
+}
+
+@media screen and (max-width: 978px) {
+  .profile_modify {
+    height: 130vh;
+  }
+} */
+
+/* @media screen and (max-width: 768px) {
+  .movie_history {
+    width: 70%;
+  }
+
+  .profile_modify {
+    width: 70%;
+    
+  }
+} */
 </style>

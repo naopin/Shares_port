@@ -44,9 +44,27 @@ export default {
   box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.2);
   border: 1px solid #eee;
 }
+.parentItems h2:hover {
+  color: rgb(116, 142, 255);
+  transform: translateY(5px);
+  transition: all .5s;
+}
 
 .childItems h2 {
   padding: 0.5em 1em 4.5em 1em;
+}
+
+.childItems:hover img {
+    opacity: 1;
+    animation: flash 2s;
+}
+@keyframes flash {
+    0% {
+        opacity: .4;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 #contents .username {
