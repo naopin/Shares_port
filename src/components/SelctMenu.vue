@@ -6,8 +6,8 @@
         <label @click="click(item.value)" :for="item.name">{{item.menu}}</label>
       </div>
     </div>
-    <!-- タブメニュークリック時にクリックされたvalueを渡す -->
-    <Contents :value="clicked"></Contents>
+    <!-- タブメニュークリック時にクリックされたitemsのvalueを渡す -->
+    <Contents></Contents>
   </div>
 </template>
 <script>
@@ -19,7 +19,9 @@ export default {
       // タブメニューの初期値
       isActive: "JavascriptValue",
       // タブコンテンツの初期値
-      clicked: "JavascriptValue",
+      // clicked: "JavascriptValue",
+      clicked: "",
+
       items: [
         { menu: "Javascript", value: "JavascriptValue", name: "JavascriptTab" },
         { menu: "Vue.js", value: "VueValue", name: "VueTab" },
@@ -32,8 +34,7 @@ export default {
   },
   methods: {
     click(value) {
-      this.clicked = value;
-      // console.log(this.clicked)
+      this.$store.commit("changeValue", value);
     }
   }
 };
