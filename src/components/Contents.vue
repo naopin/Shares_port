@@ -81,7 +81,6 @@ export default {
 }
 #contents .parentItems {
   display: flex;
-
   flex-wrap: wrap;
   justify-content: space-between;
 }
@@ -126,5 +125,48 @@ export default {
 
 #contents form input {
   width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+ #contents .parentItems {
+font-size: 0.8em;
+}
+#contents form {
+  font-size: 1.5em;
+  margin: 1.3em 0;
+}
+#contents .username {
+  font-size: 1.2em;
+}
+
+}
+
+@media screen and (max-width: 600px) {
+#contents .childItems {
+  width: 48%;
+}
+
+ #contents .parentItems {
+font-size: 0.5em;
+}
+
+#contents .username {
+  font-size: 1.0em;
+}
+
+#contents .forms {
+  width: 60%;
+}
+
+}
+
+@media screen and (max-width: 375px) {
+#contents .childItems {
+  width: 98%;
+}
+#contents .forms {
+  width: 90%;
+}
+
 }
 </style>

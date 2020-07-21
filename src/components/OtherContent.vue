@@ -11,7 +11,7 @@
         <!-- 検索機能 -->
         <div class="forms">
           <form>
-            <input type="search" v-model="otherKeyword" placeholder="キーワードを入力してください" />
+            <input type="search" v-model="otherKeyword" placeholder="キーワード" />
           </form>
         </div>
         <div class="parentItems">

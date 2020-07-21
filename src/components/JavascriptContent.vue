@@ -13,7 +13,7 @@
             <!-- 検索機能 -->
             <div class="forms">
               <form>
-                <input type="search" v-model="jsKeyword" placeholder="キーワードを入力してください" />
+                <input type="search" v-model="jsKeyword" placeholder="キーワード" />
               </form>
             </div>
             <div class="parentItems">

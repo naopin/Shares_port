@@ -58,29 +58,4 @@ export default {
   }
 }
 
-/* @media screen and (max-width: 1062px) {
-  .movie_history {
-    width: 43%;
-  }
-  .profile_modify {
-    width: 43%;
-  }
-}
-
-@media screen and (max-width: 978px) {
-  .profile_modify {
-    height: 130vh;
-  }
-} */
-
-/* @media screen and (max-width: 768px) {
-  .movie_history {
-    width: 70%;
-  }
-
-  .profile_modify {
-    width: 70%;
-    
-  }
-} */
 </style>

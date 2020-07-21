@@ -6,7 +6,7 @@
         <h1 class="share_title">動画検索</h1>
       </div>
       <div class="search">
-        <input placeholder="キーワードを入力してください" v-model="keyword" type="search" />
+        <input placeholder="キーワード" v-model="keyword" type="search" />
         <button @click="search_video">検索</button>
       </div>
 
@@ -296,5 +296,37 @@ table td {
   -webkit-transform: translateY(3px);
   transform: translateY(3px); /*下に動く*/
   border-bottom: none; /*線を消す*/
+}
+
+@media screen and (max-width: 900px) {
+  .share_table {
+    font-size: .8em;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+ .share h1 {
+   font-size: 1em;
+ }
+   .share_table {
+    font-size: .6em;
+  }
+}
+
+@media screen and (max-width: 600px) {
+ .share_table {
+    font-size: .4em;
+  }
+}
+
+@media screen and (max-width: 375px) {
+ .share h1 {
+   font-size: .8em;
+   overflow: scroll;
+ }
+  .share_table {
+    font-size: .4em;
+  }
 }
 </style>

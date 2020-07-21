@@ -12,7 +12,7 @@
         <!-- 検索機能 -->
         <div class="forms">
           <form>
-            <input type="search" v-model="vueKeyword" placeholder="キーワードを入力してください" />
+            <input type="search" v-model="vueKeyword" placeholder="キーワード" />
           </form>
         </div>
         <div class="parentItems">
