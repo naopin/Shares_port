@@ -32,7 +32,7 @@ body {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-
+p,
 h2,
 h3,
 h4,
