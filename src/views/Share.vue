@@ -23,26 +23,26 @@
               <font>Contents</font>
             </th>
           </tr>
-
-          <tr v-for="(movie, index) in results" v-bind:key="movie.id.videoId">
+          <tr @click="click(movie)" v-for="(movie, index) in results" v-bind:key="movie.id.videoId">
             <!-- No -->
             <td>{{ index + 1 }}</td>
             <!-- Video -->
-            <td @click="click(movie)">
+            <td>
               <img v-bind:src="movie.snippet.thumbnails.medium.url" />
             </td>
             <!-- titleとdescription -->
-            <td>
+            <td class="tds">
               <font>
                 <b>{{ movie.snippet.title }}</b>
               </font>
               <br />
-              {{ movie.snippet.description}}
+              <div class="descript">{{ movie.snippet.description}}</div>
             </td>
           </tr>
         </table>
       </div>
       <MyModal @close="closeModal" v-if="shareModal">
+        <div class="modal_contents">
         <div class="frame">
           <iframe
             width="448"
@@ -65,18 +65,12 @@
                   <option v-for="catregory in categories" :key="catregory.name">{{catregory.name}}</option>
                 </select>
               </div>
-              <div class="contents">
-                <h3>コンテンツ</h3>
-                <select v-model="content">
-                  <option>動画</option>
-                  <option>記事</option>
-                </select>
-              </div>
             </div>
             <div class="share_button">
               <button @click="share()">投稿</button>
             </div>
           </div>
+        </div>
         </div>
       </MyModal>
     </div>
@@ -159,15 +153,15 @@ export default {
     },
     share() {
       this.$nextTick(function() {
-        if (!this.choice || !this.content) {
-          alert("「言語」若しくは「コンテンツ」を入力してください");
+        if (!this.choice) {
+          alert("「言語を入力してください");
         } else {
           const self = this;
           firebase.auth().onAuthStateChanged(function() {
             const user = firebase.auth().currentUser;
             let db = firebase.firestore();
             const sharesRef = db.collection("shares");
-        
+
             sharesRef
               .doc(self.movieItems.id.videoId)
               .set({
@@ -230,6 +224,31 @@ export default {
 table {
   border: solid 2px #a7a7a7; /*表全体を線で囲う*/
 }
+.share_table img {
+  cursor: pointer;
+}
+
+.share_table img:hover {
+  opacity: 1;
+  animation: flash 2s;
+}
+@keyframes flash {
+  0% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.tds {
+  cursor: pointer;
+}
+.tds:hover {
+  color: rgb(116, 142, 255);
+  transform: translateY(5px);
+  transition: all 0.5s;
+}
+
 table th {
   color: #141414; /*文字色*/
   background: #f6f6f6; /*背景色*/
@@ -298,35 +317,53 @@ table td {
   border-bottom: none; /*線を消す*/
 }
 
+
 @media screen and (max-width: 900px) {
-  .share_table {
-    font-size: .8em;
+  .share_table, .modal_contents {
+    font-size: 0.8em;
   }
 
 }
 
 @media screen and (max-width: 768px) {
- .share h1 {
-   font-size: 1em;
- }
-   .share_table {
-    font-size: .6em;
+  .share h1 {
+    font-size: 1em;
+  }
+  .share_table , .modal_contents {
+    font-size: 0.6em;
+  }
+  .search {
+    font-size: 0.8em;
+  }
+  .frame iframe {
+     width: 336px;
+     height: 189px;
   }
 }
 
 @media screen and (max-width: 600px) {
- .share_table {
-    font-size: .4em;
+  .descript {
+    display: none;
+  }
+  .share_table {
+    font-size: 0.4em;
+  }
+  .modal_contents {
+    width: 80%;
+    margin:0 auto ;
   }
 }
 
 @media screen and (max-width: 375px) {
- .share h1 {
-   font-size: .8em;
-   overflow: scroll;
- }
   .share_table {
-    font-size: .4em;
+    font-size: 0.3em;
+  }
+  .tds {
+    width: 80px;
+    overflow: hidden;
+  }
+  .search {
+    font-size: 0.6em;
   }
 }
 </style>

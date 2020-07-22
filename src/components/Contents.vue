@@ -76,8 +76,8 @@ export default {
 }
 
 #contents .frames {
-  width: 90em;
-  height: 50em;
+  width: 80em;
+  height: 45em;
 }
 #contents .parentItems {
   display: flex;
@@ -127,6 +127,14 @@ export default {
   width: 100%;
 }
 
+
+@media screen and (max-width: 1000px) {
+#contents .frames {
+  width: 60em;
+  height: 34em;
+}
+}
+
 @media screen and (max-width: 768px) {
  #contents .parentItems {
 font-size: 0.8em;
@@ -137,6 +145,10 @@ font-size: 0.8em;
 }
 #contents .username {
   font-size: 1.2em;
+}
+#contents .frames {
+  width: 46em;
+  height: 28em;
 }
 
 }
@@ -156,6 +168,10 @@ font-size: 0.5em;
 
 #contents .forms {
   width: 60%;
+}
+#contents .frames {
+  width: 35em;
+  height: 20em;
 }
 
 }

@@ -7,7 +7,7 @@
           <ul>
             <li>
               <div class="modal-window">
-                <button @click="SignInopenModal">SIGNIN</button>
+                <button @click="SignInopenModal"><font-awesome-icon :icon="['fas', 'sign-in-alt']" />SIGNIN</button>
                 <MyModal @close="SignIncloseModal" v-if="SignInModal">
                   <SignIn></SignIn>
                 </MyModal>
@@ -15,7 +15,7 @@
             </li>
             <li>
               <div class="modal-window">
-                <button @click="SignOutopenModal">SIGNUP</button>
+                <button @click="SignOutopenModal"><font-awesome-icon :icon="['fas', 'user-plus']" />SIGNUP</button>
                 <MyModal @close="SignOutcloseModal" v-if="SignOutModal">
                   <SignUp></SignUp>
                 </MyModal>
