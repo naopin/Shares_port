@@ -1,6 +1,13 @@
 <template>
   <div>
-    <Header></Header>
+    <nav>
+      <div id="header">
+        <div class="navbar">
+          <router-link class="navbar_log" to="/">Shares</router-link>
+        </div>
+      </div>
+    </nav>
+
     <div class="container">
       <div class="box">
         <h1>Javascript学習支援サービス</h1>
@@ -27,12 +34,10 @@
 
 
 <script>
-import Header from "@/components/Header.vue";
 import { firebaseApp } from "../main";
 import "firebase/auth";
 import "firebase/firestore";
 export default {
-  components: { Header },
   name: "Home",
   data() {
     return {
@@ -63,6 +68,21 @@ export default {
 </script>
 
 <style scoped>
+#header {
+  background: #f6f6f6;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  font-family: "Gabriola", "Skia-Regular_Condensed", "Noteworthy", sans-serif;
+  padding: 1em;
+}
+
+.navbar_log {
+  font-size: 4.5em;
+  font-weight: 300;
+  margin: 0;
+  padding: 1rem 0;
+  text-shadow: 2px 2px 3px #acabab;
+}
+
 .container {
   text-align: center;
   font-size: 2em;
@@ -133,6 +153,9 @@ export default {
   padding: 0.5em 0.6em;
 }
 
+.category .items {
+    cursor: pointer;
+}
 .category .items:nth-child(1) {
   background: #ffd000;
   border: solid 3px rgb(255, 208, 0);
@@ -160,12 +183,15 @@ export default {
 
 .category .items:hover {
   background: transparent;
-  transition: 1s;
+  transition: .5s;
   color: white;
+  transform: translateY(10px);
+  box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.2);
 }
 .category .items:nth-child(1):hover {
   border: solid 3px rgb(255, 208, 0);
 }
+
 .category .items:nth-child(2):hover {
   border: solid 3px rgb(116, 255, 60);
 }
@@ -210,9 +236,12 @@ export default {
   }
   .box {
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
+  }
+  .navbar_log {
+    font-size: 3.5em;
   }
 }
 
@@ -228,6 +257,9 @@ export default {
   }
   .category .items {
     margin-bottom: 0.7em;
+  }
+  .navbar_log {
+    font-size: 3em;
   }
 }
 @media screen and (max-width: 500px) {
@@ -248,6 +280,9 @@ export default {
 @media screen and (max-width: 375px) {
   .category .items {
     width: 30%;
+  }
+  .navbar_log {
+    font-size: 2.5em;
   }
 }
 </style>

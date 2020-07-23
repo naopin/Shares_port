@@ -43,34 +43,34 @@
       </div>
       <MyModal @close="closeModal" v-if="shareModal">
         <div class="modal_contents">
-        <div class="frame">
-          <iframe
-            width="448"
-            height="252"
-            :src="resultVideo"
-            frameborder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          >></iframe>
-        </div>
-        <div class="selectmovie">
-          <div class="recommend">
-            <div class="recommend_p">
-              <p>{{selectMovieTitle}}</p>
-            </div>
-            <div class="recommend_sub">
-              <div class="category">
-                <h3>言語</h3>
-                <select v-model="choice" @change="selectCategory">
-                  <option v-for="catregory in categories" :key="catregory.name">{{catregory.name}}</option>
-                </select>
+          <div class="frame">
+            <iframe
+              width="448"
+              height="252"
+              :src="resultVideo"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            >></iframe>
+          </div>
+          <div class="selectmovie">
+            <div class="recommend">
+              <div class="recommend_p">
+                <p>{{selectMovieTitle}}</p>
+              </div>
+              <div class="recommend_sub">
+                <div class="category">
+                  <h3>言語</h3>
+                  <select v-model="choice" @change="selectCategory">
+                    <option v-for="catregory in categories" :key="catregory.name">{{catregory.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="share_button">
+                <button @click="share()">投稿</button>
               </div>
             </div>
-            <div class="share_button">
-              <button @click="share()">投稿</button>
-            </div>
           </div>
-        </div>
         </div>
       </MyModal>
     </div>
@@ -317,27 +317,27 @@ table td {
   border-bottom: none; /*線を消す*/
 }
 
-
 @media screen and (max-width: 900px) {
-  .share_table, .modal_contents {
+  .share_table,
+  .modal_contents {
     font-size: 0.8em;
   }
-
 }
 
 @media screen and (max-width: 768px) {
   .share h1 {
     font-size: 1em;
   }
-  .share_table , .modal_contents {
+  .share_table,
+  .modal_contents {
     font-size: 0.6em;
   }
   .search {
     font-size: 0.8em;
   }
   .frame iframe {
-     width: 336px;
-     height: 189px;
+    width: 336px;
+    height: 189px;
   }
 }
 
@@ -350,7 +350,7 @@ table td {
   }
   .modal_contents {
     width: 80%;
-    margin:0 auto ;
+    margin: 0 auto;
   }
 }
 

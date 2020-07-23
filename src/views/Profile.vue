@@ -38,7 +38,7 @@ export default {
   border: 1px solid #eee;
   background: #fafafa;
   margin: 1em;
-  padding-bottom:2em ;
+  padding-bottom: 2em;
 }
 .movie_history {
   width: 46%;
@@ -49,7 +49,7 @@ export default {
 }
 
 @media screen and (max-width: 690px) {
-    .movie_history {
+  .movie_history {
     width: 70%;
   }
 
@@ -57,5 +57,4 @@ export default {
     width: 70%;
   }
 }
-
 </style>

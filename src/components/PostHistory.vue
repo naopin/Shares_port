@@ -3,10 +3,10 @@
     <h1 class="movie_history_title">投稿履歴</h1>
     <div class="childItems">
       <div class="history_cards">
-        <img class="thumbnails" v-bind:src="firstThumbnails" />
-        <h2>{{firstTitle}}</h2>
+        <img class="thumbnails" v-bind:src="firstMovie.thumbnails.medium.url" />
+        <h2>{{firstMovie.title}}</h2>
       </div>
-      <button class="delete_btn" @click="deleteBtn(item)">削除</button>
+      <button class="delete_btn" @click="firstDeleteBtn(firstMovie)">削除</button>
     </div>
     <div class="display">
       <button @click="openModal()">一覧を表示</button>
@@ -40,9 +40,7 @@ export default {
     return {
       allHistoryMovie: [],
       modal: false,
-      firstThumbnails: "",
-      firstTitle:"",
-
+      firstMovie: []
     };
   },
 
@@ -66,9 +64,7 @@ export default {
                 return item.userId === user.uid;
               });
               self.allHistoryMovie = filterUid;
-              console.log(self.allHistoryMovie)
-              self.firstThumbnails = filterUid[0].snippet.thumbnails.medium.url;
-              self.firstTitle = filterUid[0].snippet.title;
+              self.firstMovie = filterUid[0].snippet;
             });
         } else {
           self.$router.push("/");
@@ -77,6 +73,19 @@ export default {
     });
   },
   methods: {
+    // 最初の動画削除
+    firstDeleteBtn(value) {
+      firebase
+        .firestore()
+        .collection("shares")
+        .doc(value.movieId)
+        .delete()
+        .then(() => {})
+        .catch(error => {
+          console.error("Error removing document: ", error);
+        });
+    },
+    // 一覧の動画削除
     deleteBtn(value) {
       firebase
         .firestore()
@@ -84,7 +93,7 @@ export default {
         .doc(value.snippet.movieId)
         .delete()
         .then(() => {
-          console.log("履歴", this.allHistoryMovie);
+          // console.log("履歴", this.allHistoryMovie);
         })
         .catch(error => {
           console.error("Error removing document: ", error);
@@ -152,10 +161,11 @@ export default {
   margin: 1.5em;
 }
 .display button {
- background: rgb(255, 144, 41);
+  background: rgb(255, 144, 41);
 }
 
-.delete_btn , .display button {
+.delete_btn,
+.display button {
   color: rgb(255, 255, 255);
   padding: 0.5em 1em;
   font-size: 1.3em;
@@ -179,10 +189,11 @@ export default {
   background: rgb(255, 103, 103);
 }
 .display button:hover {
- background: rgb(255, 169, 89);
+  background: rgb(255, 169, 89);
 }
 
-.delete_btn:active ,.display button:active{
+.delete_btn:active,
+.display button:active {
   -webkit-transform: translateY(3px);
   transform: translateY(3px); /*下に動く*/
   border-bottom: none; /*線を消す*/
@@ -204,7 +215,8 @@ export default {
   .history_cards h2 {
     font-size: 1em;
   }
-  .delete_btn, .display button {
+  .delete_btn,
+  .display button {
     padding: 0.5em 0.8em;
     font-size: 1.1em;
     border-bottom: solid 3px #6b6b6b;

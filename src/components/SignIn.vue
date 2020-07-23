@@ -39,10 +39,7 @@ export default {
   },
   methods: {
     resetPassword: function() {
-      this.email = window.prompt(
-        "ご登録されたメールアドレスをご入力下さい",
-
-      );
+      this.email = window.prompt("ご登録されたメールアドレスをご入力下さい");
       firebase.auth().languageCode = "ja"; // 日本語に設定
       firebase
         .auth()
@@ -67,7 +64,7 @@ export default {
         });
       this.email = "";
       this.password = "";
-    },
+    }
   }
 };
 </script>
@@ -83,6 +80,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   padding: 1.5em;
+  color: #333333;
 }
 
 table {
@@ -102,8 +100,8 @@ button {
   font-weight: 300;
 }
 
-.login{
-  margin-bottom:1em ;  
+.login {
+  margin-bottom: 1em;
 }
 
 td {
@@ -127,28 +125,27 @@ input {
 }
 
 @media screen and (max-width: 768px) {
-#signin {
-  padding: 1em;
-  font-size: 0.8em;
-}
+  #signin {
+    padding: 1em;
+    font-size: 0.8em;
+  }
 }
 
 @media screen and (max-width: 600px) {
-#signin {
-  font-size: 0.5em;
-  padding: .5em;
-}
-
+  #signin {
+    font-size: 0.5em;
+    padding: 0.5em;
+  }
 }
 
 @media screen and (max-width: 375px) {
-#signin {
-  font-size: 0.4em;
-  padding: .5em;
-}
+  #signin {
+    font-size: 0.4em;
+    padding: 0.5em;
+  }
 
-input {
-  width: 80%;
-}
+  input {
+    width: 80%;
+  }
 }
 </style>

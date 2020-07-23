@@ -134,6 +134,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   padding: 3rem;
+  color: #333333;
 }
 
 table {
@@ -166,30 +167,28 @@ input {
   font-size: 0.8em;
 }
 
-
 @media screen and (max-width: 768px) {
-#signup {
-  padding: 1em;
-  font-size: 0.8em;
-}
+  #signup {
+    padding: 1em;
+    font-size: 0.8em;
+  }
 }
 
 @media screen and (max-width: 600px) {
-#signup {
-  font-size: 0.5em;
-  padding: .5em;
-}
-
+  #signup {
+    font-size: 0.5em;
+    padding: 0.5em;
+  }
 }
 
 @media screen and (max-width: 375px) {
-#signup {
-  font-size: 0.4em;
-  padding: .5em;
-}
+  #signup {
+    font-size: 0.4em;
+    padding: 0.5em;
+  }
 
-input {
-  width: 80%;
-}
+  input {
+    width: 80%;
+  }
 }
 </style>

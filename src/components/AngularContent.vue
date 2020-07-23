@@ -1,36 +1,35 @@
 <template>
   <div id="angular">
-      <!-- Angular -->
-      <transition name="fade">
-        <div v-if="this.$store.state.value == 'AngularValue'">
-          <MyModal @close="angularCloseModal()" v-if="angularModal">
-            <div class="frames">
-              <iframe width="100%" height="100%" :src="angularIframe"></iframe>
-            </div>
-          </MyModal>
-          <!-- 検索機能 -->
-          <div class="forms">
-            <form>
-              <input type="search" v-model="angularKeyword" placeholder="キーワード" />
-            </form>
+    <!-- Angular -->
+    <transition name="fade">
+      <div v-if="this.$store.state.value == 'AngularValue'">
+        <MyModal @close="angularCloseModal()" v-if="angularModal">
+          <div class="frames">
+            <iframe width="100%" height="100%" :src="angularIframe"></iframe>
           </div>
-          <div class="parentItems">
-            <div class="childItems" v-for="item in angularReserch" :key="item.url">
-              <div @click="angularOpenModal(), clickAngularItem(item)">
-                <img v-bind:src="item.thumbnail" />
-                <h2>{{item.title}}</h2>
-                <div class="username">
-                  <p>投稿者:{{item.userName}}</p>
-                </div>
+        </MyModal>
+        <!-- 検索機能 -->
+        <div class="forms">
+          <form>
+            <input type="search" v-model="angularKeyword" placeholder="キーワード" />
+          </form>
+        </div>
+        <div class="parentItems">
+          <div class="childItems" v-for="item in angularReserch" :key="item.url">
+            <div @click="angularOpenModal(), clickAngularItem(item)">
+              <img v-bind:src="item.thumbnail" />
+              <h2>{{item.title}}</h2>
+              <div class="username">
+                <p>投稿者:{{item.userName}}</p>
               </div>
             </div>
           </div>
         </div>
-      </transition>
+      </div>
+    </transition>
   </div>
 </template>
 <script>
-
 import "firebase/auth";
 import "firebase/firestore";
 import { firebaseApp } from "../main";
@@ -49,7 +48,7 @@ export default {
       //category別の動画
       angularItems: [],
       //category別Iframe
-      angularIframe: "",
+      angularIframe: ""
     };
   },
   created() {
@@ -77,7 +76,6 @@ export default {
               thumbnail: elm.snippet.thumbnails.medium.url
             };
           });
-
         });
     });
   },
@@ -92,7 +90,7 @@ export default {
     },
     angularCloseModal() {
       this.angularModal = false;
-    },
+    }
   },
   computed: {
     //angular検索機能
@@ -105,7 +103,7 @@ export default {
         }
       }
       return angularMapitems;
-    },
+    }
   }
 };
 </script>

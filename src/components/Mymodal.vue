@@ -3,7 +3,7 @@
     <div class="modal modal-overlay" @click.self="$emit('close')">
       <div class="modal-window">
         <div class="modal-content">
-          <slot/>
+          <slot />
         </div>
         <footer class="modal-footer">
           <slot name="footer">
@@ -42,10 +42,12 @@
   text-align: right;
 }
 
-.modal-enter-active, .modal-leave-active {
+.modal-enter-active,
+.modal-leave-active {
   transition: opacity 0.3s;
 }
-.modal-enter-active .modal-window, .modal-leave-active .modal-window {
+.modal-enter-active .modal-window,
+.modal-leave-active .modal-window {
   transition: opacity 0.3s, transform 0.3s;
 }
 
@@ -53,35 +55,37 @@
   transition: opacity 0.6s ease 0.1s;
 }
 
-.modal-enter, .modal-leave-to {
+.modal-enter,
+.modal-leave-to {
   opacity: 0;
 }
-.modal-enter .modal-window, .modal-leave-to .modal-window {
+.modal-enter .modal-window,
+.modal-leave-to .modal-window {
   opacity: 0;
   transform: translateY(-100px);
 }
 
 @media screen and (max-width: 768px) {
-.modal-footer button {
-  font-size: 0.8em;
-}
+  .modal-footer button {
+    font-size: 0.8em;
+  }
 }
 
 @media screen and (max-width: 600px) {
-.modal-footer button {
-  font-size: 0.5em;
-}
-.modal-footer  {
-  padding:5px;
-}
+  .modal-footer button {
+    font-size: 0.5em;
+  }
+  .modal-footer {
+    padding: 5px;
+  }
 }
 
 @media screen and (max-width: 375px) {
-.modal-footer button {
-  font-size: 0.4em;
-}
-.modal-footer  {
-  padding:2px;
-}
+  .modal-footer button {
+    font-size: 0.4em;
+  }
+  .modal-footer {
+    padding: 2px;
+  }
 }
 </style>

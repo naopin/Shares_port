@@ -31,10 +31,10 @@
         <input type="text" @input="emailModify" />
         <div class="input">
           <div>
-            <input type="text" placeholder="現在のメールアドレスを入力してください" @input="pastEmail" />
+            <input type="text" placeholder="現在のメールアドレス" @input="pastEmail" />
           </div>
           <div>
-            <input type="text" placeholder="パスワードを入力してください" @input="pastPassword" />
+            <input type="text" placeholder="パスワード" @input="pastPassword" />
           </div>
         </div>
 
@@ -164,7 +164,7 @@ export default {
 
 <style scoped>
 ::placeholder {
-  font-size: 0.6em;
+  font-size: .8em;
 }
 .profile_title h1 {
   font-size: 4em;
@@ -249,16 +249,12 @@ button {
     font-size: 2em;
   }
   .profile_modify {
-  font-size: 1.6em;
-}
-::placeholder {
-  font-size: 0.3em;
-}
-button {
+    font-size: 1.6em;
+  }
+  button {
     padding: 0.4em 0.8em;
     font-size: 0.8em;
   }
-
 }
 
 @media screen and (max-width: 375px) {
@@ -266,9 +262,7 @@ button {
     font-size: 1.8em;
   }
   .profile_modify {
-  font-size: 1.4em;
+    font-size: 1.4em;
+  }
 }
-
-}
-
 </style>
