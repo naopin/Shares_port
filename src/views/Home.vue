@@ -6,7 +6,7 @@
     <div v-if="navbar">
       <HeaderSignIn></HeaderSignIn>
     </div>
-      <SelctMenu></SelctMenu>
+    <SelctMenu></SelctMenu>
   </div>
 </template>
 
@@ -15,20 +15,19 @@
 import Header from "@/components/Header.vue";
 import HeaderSignIn from "@/components/HeaderSignIn.vue";
 import firebase from "firebase";
-import SelctMenu from "../components/SelctMenu"
-
+import SelctMenu from "../components/SelctMenu";
 
 export default {
-  components: { Header,  HeaderSignIn, SelctMenu},
+  components: { Header, HeaderSignIn, SelctMenu },
   name: "Home",
   data() {
     return {
-      navbar: false,
+      navbar: false
     };
   },
   created() {
     this.$nextTick(function() {
-      firebase.auth().onAuthStateChanged((user)=> {
+      firebase.auth().onAuthStateChanged(user => {
         if (user) {
           // console.log("ログイン中", user);
           this.navbar = true;

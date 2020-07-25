@@ -7,7 +7,7 @@
           <label class="label" for="username">ユーザー名</label>
         </td>
         <td>
-          <input id="username" type="text" v-model="username" placeholder="ユーザー名をご入力下さい" />
+          <input id="username" type="text" v-model="username" placeholder="ユーザー名" />
         </td>
       </tr>
       <tr>
@@ -15,7 +15,7 @@
           <label for="email">メールアドレス</label>
         </td>
         <td>
-          <input id="email" type="email" v-model="email" placeholder="メールアドレスをご入力下さい" />
+          <input id="email" type="email" v-model="email" placeholder="メールアドレス" />
         </td>
       </tr>
 
@@ -24,7 +24,7 @@
           <label for="password">パスワード</label>
         </td>
         <td>
-          <input id="password" type="password" v-model="password" placeholder="パスワードを入力して下さい" />
+          <input id="password" type="password" v-model="password" placeholder="パスワード" />
         </td>
       </tr>
       <tr>
@@ -36,7 +36,7 @@
             id="passwordConfirm"
             type="password"
             v-model="passwordConfirm"
-            placeholder="もう一度ご入力下さい"
+            placeholder="パスワード確認"
           />
         </td>
       </tr>
@@ -134,6 +134,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   padding: 3rem;
+  color: #333333;
 }
 
 table {
@@ -164,5 +165,30 @@ input {
 .alert {
   color: red;
   font-size: 0.8em;
+}
+
+@media screen and (max-width: 768px) {
+  #signup {
+    padding: 1em;
+    font-size: 0.8em;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #signup {
+    font-size: 0.5em;
+    padding: 0.5em;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  #signup {
+    font-size: 0.4em;
+    padding: 0.5em;
+  }
+
+  input {
+    width: 80%;
+  }
 }
 </style>

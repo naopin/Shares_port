@@ -7,7 +7,7 @@
           <label for="email">メールアドレス</label>
         </td>
         <td>
-          <input id="email" type="email" v-model="email" placeholder="メールアドレスをご入力下さい" />
+          <input id="email" type="email" v-model="email" placeholder="メールアドレス" />
         </td>
       </tr>
 
@@ -16,7 +16,7 @@
           <label for="password">パスワード</label>
         </td>
         <td>
-          <input id="password" type="password" v-model="password" placeholder="パスワードを入力して下さい" />
+          <input id="password" type="password" v-model="password" placeholder="パスワード" />
         </td>
       </tr>
     </table>
@@ -39,10 +39,7 @@ export default {
   },
   methods: {
     resetPassword: function() {
-      this.email = window.prompt(
-        "ご登録されたメールアドレスをご入力下さい",
-
-      );
+      this.email = window.prompt("ご登録されたメールアドレスをご入力下さい");
       firebase.auth().languageCode = "ja"; // 日本語に設定
       firebase
         .auth()
@@ -67,7 +64,7 @@ export default {
         });
       this.email = "";
       this.password = "";
-    },
+    }
   }
 };
 </script>
@@ -82,16 +79,12 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  /* position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translateY(-50%) translateX(-50%); */
-  padding: 3rem;
+  padding: 1.5em;
+  color: #333333;
 }
 
 table {
   margin: 0 auto;
-  /* font-size: 1.0em; */
 }
 
 ::placeholder {
@@ -102,18 +95,17 @@ button {
   color: rgb(255, 255, 255);
   padding: 8px 15px;
   border-radius: 5px;
-  /* font-size: 0.8em; */
   background: #1ab6ff;
   box-shadow: 5px 5px 6px -3px rgba(0, 0, 0, 0.2);
   font-weight: 300;
 }
 
-.login{
-  margin-bottom:1rem ;  
+.login {
+  margin-bottom: 1em;
 }
 
 td {
-  padding: 0.8rem;
+  padding: 0.8em;
 }
 
 input {
@@ -130,5 +122,30 @@ input {
   outline: none; /* クリックしたときに表示される枠線を消す */
   background: transparent;
   cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  #signin {
+    padding: 1em;
+    font-size: 0.8em;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #signin {
+    font-size: 0.5em;
+    padding: 0.5em;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  #signin {
+    font-size: 0.4em;
+    padding: 0.5em;
+  }
+
+  input {
+    width: 80%;
+  }
 }
 </style>

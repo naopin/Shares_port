@@ -47,7 +47,7 @@ export default {
 .parentItems h2:hover {
   color: rgb(116, 142, 255);
   transform: translateY(5px);
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
 .childItems h2 {
@@ -55,16 +55,16 @@ export default {
 }
 
 .childItems:hover img {
-    opacity: 1;
-    animation: flash 2s;
+  opacity: 1;
+  animation: flash 2s;
 }
 @keyframes flash {
-    0% {
-        opacity: .4;
-    }
-    100% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 #contents .username {
@@ -76,12 +76,11 @@ export default {
 }
 
 #contents .frames {
-  width: 90em;
-  height: 50em;
+  width: 80em;
+  height: 45em;
 }
 #contents .parentItems {
   display: flex;
-
   flex-wrap: wrap;
   justify-content: space-between;
 }
@@ -126,5 +125,60 @@ export default {
 
 #contents form input {
   width: 100%;
+}
+
+@media screen and (max-width: 1000px) {
+  #contents .frames {
+    width: 60em;
+    height: 34em;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #contents .parentItems {
+    font-size: 0.8em;
+  }
+  #contents form {
+    font-size: 1.5em;
+    margin: 1.3em 0;
+  }
+  #contents .username {
+    font-size: 1.2em;
+  }
+  #contents .frames {
+    width: 46em;
+    height: 28em;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #contents .childItems {
+    width: 48%;
+  }
+
+  #contents .parentItems {
+    font-size: 0.5em;
+  }
+
+  #contents .username {
+    font-size: 1em;
+  }
+
+  #contents .forms {
+    width: 60%;
+  }
+  #contents .frames {
+    width: 35em;
+    height: 20em;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  #contents .childItems {
+    width: 98%;
+  }
+  #contents .forms {
+    width: 90%;
+  }
 }
 </style>
