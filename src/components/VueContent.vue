@@ -20,6 +20,10 @@
             <div @click="vueOpenModal(), clickVueItem(item)">
               <img v-bind:src="item.thumbnail" />
               <h2>{{item.title}}</h2>
+              <div class="comments">
+                <h3>コメント</h3>
+                <p>{{item.comment}}</p>
+              </div>
               <div class="username">
                 <p>投稿者:{{item.userName}}</p>
               </div>
@@ -48,32 +52,33 @@ export default {
       //category別の動画
       vueItems: [],
       //category別Iframe
-      vueIframe: ""
+      vueIframe: "",
     };
   },
   created() {
-    this.$nextTick(function() {
+    this.$nextTick(function () {
       const self = this;
       firebaseApp
         .firestore()
         .collection("shares")
         .get()
-        .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
             self.videoItems.push(doc.data());
           });
           //CategoryがVue.jsの動画を取得
-          self.vueItems = self.videoItems.filter(item => {
+          self.vueItems = self.videoItems.filter((item) => {
             return item.category === "Vue.js";
           });
           //vueMap
-          self.vueMapitems = self.vueItems.map(elm => {
+          self.vueMapitems = self.vueItems.map((elm) => {
             return {
               userName: elm.userName,
               url: elm.snippet.url,
               title: elm.snippet.title,
               description: elm.snippet.description,
-              thumbnail: elm.snippet.thumbnails.medium.url
+              thumbnail: elm.snippet.thumbnails.medium.url,
+              comment: elm.comment,
             };
           });
         });
@@ -91,11 +96,11 @@ export default {
     },
     vueCloseModal() {
       this.vueModal = false;
-    }
+    },
   },
   computed: {
     //vue検索機能
-    vueReserch: function() {
+    vueReserch: function () {
       let vueMapitems = [];
       for (let i in this.vueMapitems) {
         const vueMapitem = this.vueMapitems[i];
@@ -104,7 +109,7 @@ export default {
         }
       }
       return vueMapitems;
-    }
-  }
+    },
+  },
 };
 </script>

@@ -74,7 +74,4 @@ a:hover {
   transition: all 0.6s ease;
 }
 
-.content-wrapper {
-  max-width: 1400px;
-}
 </style>

@@ -21,6 +21,11 @@
               <div @click="javascriptOpenModal(), clickJsItem(item)">
                 <img v-bind:src="item.thumbnail" />
                 <h2>{{item.title}}</h2>
+                <div class="comments">
+                  <h3>コメント</h3>
+                  <p>{{item.comment}}</p>
+                </div>
+
                 <div class="username">
                   <p>投稿者:{{item.userName}}</p>
                 </div>
@@ -52,33 +57,34 @@ export default {
       //category別の動画
       javascriptItems: [],
       //category別Iframe
-      jsIframe: ""
+      jsIframe: "",
     };
   },
   created() {
-    this.$nextTick(function() {
+    this.$nextTick(function () {
       const self = this;
       firebaseApp
         .firestore()
         .collection("shares")
         .get()
-        .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
             self.videoItems.push(doc.data());
           });
           //CategoryがJavascriptの動画を取得
-          self.javascriptItems = self.videoItems.filter(item => {
+          self.javascriptItems = self.videoItems.filter((item) => {
             return item.category === "Javascript";
           });
 
           //jsMap
-          self.jsMapitems = self.javascriptItems.map(elm => {
+          self.jsMapitems = self.javascriptItems.map((elm) => {
             return {
               userName: elm.userName,
               url: elm.snippet.url,
               title: elm.snippet.title,
               description: elm.snippet.description,
-              thumbnail: elm.snippet.thumbnails.medium.url
+              thumbnail: elm.snippet.thumbnails.medium.url,
+              comment: elm.comment,
             };
           });
         });
@@ -95,11 +101,11 @@ export default {
     },
     javascriptCloseModal() {
       this.jsModal = false;
-    }
+    },
   },
   computed: {
     //javascript検索機能
-    jsReserch: function() {
+    jsReserch: function () {
       let jsMapitems = [];
       for (let i in this.jsMapitems) {
         const jsMapitem = this.jsMapitems[i];
@@ -108,7 +114,7 @@ export default {
         }
       }
       return jsMapitems;
-    }
-  }
+    },
+  },
 };
 </script>

@@ -19,6 +19,10 @@
             <div @click="angularOpenModal(), clickAngularItem(item)">
               <img v-bind:src="item.thumbnail" />
               <h2>{{item.title}}</h2>
+              <div class="comments">
+                <h3>コメント</h3>
+                <p>{{item.comment}}</p>
+              </div>
               <div class="username">
                 <p>投稿者:{{item.userName}}</p>
               </div>
@@ -48,32 +52,33 @@ export default {
       //category別の動画
       angularItems: [],
       //category別Iframe
-      angularIframe: ""
+      angularIframe: "",
     };
   },
   created() {
-    this.$nextTick(function() {
+    this.$nextTick(function () {
       const self = this;
       firebaseApp
         .firestore()
         .collection("shares")
         .get()
-        .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
             self.videoItems.push(doc.data());
           });
           //CategoryがAngularの動画を取得
-          self.angularItems = self.videoItems.filter(item => {
+          self.angularItems = self.videoItems.filter((item) => {
             return item.category === "Angular";
           });
           //AngularMap
-          self.angularMapitems = self.angularItems.map(elm => {
+          self.angularMapitems = self.angularItems.map((elm) => {
             return {
               userName: elm.userName,
               url: elm.snippet.url,
               title: elm.snippet.title,
               description: elm.snippet.description,
-              thumbnail: elm.snippet.thumbnails.medium.url
+              thumbnail: elm.snippet.thumbnails.medium.url,
+              comment: elm.comment,
             };
           });
         });
@@ -90,11 +95,11 @@ export default {
     },
     angularCloseModal() {
       this.angularModal = false;
-    }
+    },
   },
   computed: {
     //angular検索機能
-    angularReserch: function() {
+    angularReserch: function () {
       let angularMapitems = [];
       for (let i in this.angularMapitems) {
         const angularMapitem = this.angularMapitems[i];
@@ -103,7 +108,7 @@ export default {
         }
       }
       return angularMapitems;
-    }
-  }
+    },
+  },
 };
 </script>

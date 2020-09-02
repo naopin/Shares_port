@@ -3,7 +3,7 @@
     <nav>
       <div id="header">
         <div class="navbar">
-          <router-link class="navbar_log" to="/">Shares</router-link>
+          <router-link class="navbar_log" to="/home">Shares</router-link>
           <ul>
             <li>
               <router-link to="/home">
@@ -60,9 +60,10 @@ export default {
 
 <style scoped>
 #header {
-  background: #f6f6f6;
+  background: rgba(0, 0, 0, 0.842);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-  font-family: "Gabriola", "Skia-Regular_Condensed", "Noteworthy", sans-serif;
+  font-family: "century","Gabriola", "Skia-Regular_Condensed", "Noteworthy", sans-serif;
+  
 }
 .navbar {
   display: flex;
@@ -80,6 +81,9 @@ li {
   text-decoration: none;
   padding: 1em 1.2em;
 }
+.icons {
+  display: none;
+}
 .icons:nth-child(1),
 .icons:nth-child(2),
 .icons:nth-child(3),
@@ -96,8 +100,8 @@ li:nth-child(4) {
   position: relative;
 }
 a {
-  color: rgb(51, 50, 114);
-  text-shadow: 2px 2px 3px #acabab;
+  /* color: #f2711c; */
+  color: rgba(255,255,255,.9);
 }
 
 a:hover,
@@ -117,6 +121,10 @@ a:hover,
   .navbar .menu {
     display: none;
   }
+
+  .icons {
+  display: block;
+}
   .navbar_log {
     font-size: 3.5em;
   }

@@ -66,6 +66,10 @@
                   </select>
                 </div>
               </div>
+              <div class="comment">
+                <h3>おすすめコメント</h3>
+               <textarea @input="textArea" ></textarea>
+              </div>
               <div class="share_button">
                 <button @click="share()">投稿</button>
               </div>
@@ -100,6 +104,7 @@ export default {
       ],
       content: "",
       choice: "",
+      comment: "",
       selctedCategory: "",
       movieItems: "",
       selectMovieTitle: "",
@@ -123,6 +128,10 @@ export default {
     msg: String
   },
   methods: {
+    // コメント取得
+    textArea(e) {
+       this.comment = e.target.value;
+    },
     closeModal() {
       this.shareModal = false;
     },
@@ -168,6 +177,7 @@ export default {
                 userName: user.displayName,
                 userId: user.uid,
                 category: self.selctedCategory,
+                comment: self.comment,
                 snippet: {
                   title: self.movieItems.snippet.title,
                   description: self.movieItems.snippet.description,
@@ -282,7 +292,8 @@ table td {
 }
 
 .recommend_p,
-.recommend_sub {
+.recommend_sub,
+.comment {
   width: 90%;
   margin: 0 auto;
 }

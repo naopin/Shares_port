@@ -3,7 +3,7 @@
     <nav>
       <div id="header">
         <div class="navbar">
-          <router-link class="navbar_log" to="/">Shares</router-link>
+          <router-link class="navbar_log" to="/home">Shares</router-link>
           <ul>
             <li>
               <div class="modal-window">
@@ -11,6 +11,7 @@
                   <font-awesome-icon class="icons" :icon="['fas', 'sign-in-alt']" />
                   <span class="menu">SIGNIN</span>
                 </span>
+
 
                 <MyModal @close="SignIncloseModal" v-if="SignInModal">
                   <SignIn></SignIn>
