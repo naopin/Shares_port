@@ -35,14 +35,31 @@ export default {
   }
 };
 </script>
+
 <style>
-#contents {
-  margin: 5em 5em;
-}
+
 #content {
   padding: 2em 1em;
   box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.2);
   border: 1px solid #eee;
+
+   background-image: url("../assets/bg.jpg");
+  background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.89),
+        rgba(56, 56, 56, 0.842)
+       
+      )
+      fixed,
+    url(../assets/bg.jpg) fixed;
+  background-size: cover;
+  min-height:100vh
+
+}
+.childItems {
+background: -webkit-linear-gradient(to right, #FFFFFF, #ECE9E6);  
+background: linear-gradient(to right, #FFFFFF, #ECE9E6);
+
 }
 .parentItems h2:hover {
   color: rgb(116, 142, 255);
@@ -51,7 +68,7 @@ export default {
 }
 
 .childItems h2 {
-  padding: 0.5em 1em 4.5em 1em;
+  padding: 0.5em 1em 2em 1em;
 }
 
 .childItems:hover img {
@@ -73,6 +90,14 @@ export default {
   position: absolute;
   bottom: 0;
   margin-left: 0.5em;
+}
+.comments {
+  padding-bottom:3em ;
+  font-size: 1.5em;
+  margin-left: 0.5em;
+}
+.comments p {
+  color: rgb(24, 31, 59);
 }
 
 #contents .frames {
@@ -160,7 +185,7 @@ export default {
     font-size: 0.5em;
   }
 
-  #contents .username {
+  #contents .username .comments {
     font-size: 1em;
   }
 

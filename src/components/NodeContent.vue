@@ -19,6 +19,10 @@
             <div @click="nodeOpenModal(), clickNodeItem(item)">
               <img v-bind:src="item.thumbnail" />
               <h2>{{item.title}}</h2>
+              <div class="comments">
+                <h3>コメント</h3>
+                <p>{{item.comment}}</p>
+              </div>
               <div class="username">
                 <p>投稿者:{{item.userName}}</p>
               </div>
@@ -48,32 +52,33 @@ export default {
       //category別の動画
       nodeItems: [],
       //category別Iframe
-      nodeIframe: ""
+      nodeIframe: "",
     };
   },
   created() {
-    this.$nextTick(function() {
+    this.$nextTick(function () {
       const self = this;
       firebaseApp
         .firestore()
         .collection("shares")
         .get()
-        .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
             self.videoItems.push(doc.data());
           });
           //CategoryがNode.jsの動画を取得
-          self.nodeItems = self.videoItems.filter(item => {
+          self.nodeItems = self.videoItems.filter((item) => {
             return item.category === "Node.js";
           });
           //nodeMap
-          self.nodeMapitems = self.nodeItems.map(elm => {
+          self.nodeMapitems = self.nodeItems.map((elm) => {
             return {
               userName: elm.userName,
               url: elm.snippet.url,
               title: elm.snippet.title,
               description: elm.snippet.description,
-              thumbnail: elm.snippet.thumbnails.medium.url
+              thumbnail: elm.snippet.thumbnails.medium.url,
+              comment: elm.comment,
             };
           });
         });
@@ -90,11 +95,11 @@ export default {
     },
     nodeCloseModal() {
       this.nodeModal = false;
-    }
+    },
   },
   computed: {
     //node検索機能
-    nodeReserch: function() {
+    nodeReserch: function () {
       let nodeMapitems = [];
       for (let i in this.nodeMapitems) {
         const nodeMapitem = this.nodeMapitems[i];
@@ -103,7 +108,7 @@ export default {
         }
       }
       return nodeMapitems;
-    }
-  }
+    },
+  },
 };
 </script>

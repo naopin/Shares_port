@@ -60,8 +60,7 @@ export default {
 <style scoped>
 .tabs {
   display: flex;
-  box-shadow: 5px 5px 6px -3px rgba(0, 0, 0, 0.5);
-  border-radius: 5px;
+ 
 }
 .tabs input, .menus_drawer input {
   display: none;
@@ -70,7 +69,8 @@ export default {
   text-align: center;
   cursor: pointer;
   padding: 1rem 5rem;
-  font-family: "Gabriola", "Skia-Regular_Condensed", "Noteworthy", sans-serif;
+  font-family: "century","Gabriola", "Skia-Regular_Condensed", "Noteworthy", sans-serif;
+  font-weight: bold;
   transition: all 0.6s 0s ease;
 }
 .tabMenues {
@@ -78,40 +78,42 @@ export default {
   justify-content: center;
   align-items: center;
   font-size: 2em;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
-  background: #e9e9e8;
+ background: rgba(56, 56, 56, 0.842);
+ color: rgba(255,255,255,.9);
+ 
 }
 
 
 .menus_drawer:nth-child(1) input:checked + label,
+.tabs:nth-child(1) input:checked + label,
 .tabs:nth-child(1) label:hover {
-  background: rgb(250, 253, 60);
+  background: rgba(250, 253, 60, 0.8);
 }
 .menus_drawer:nth-child(2) input:checked + label,
 .tabs:nth-child(2) input:checked + label,
 .tabs:nth-child(2) label:hover {
-  background: rgb(116, 255, 60);
+  background: rgb(116, 255, 60, 0.8);
 }
 .menus_drawer:nth-child(3) input:checked + label,
 .tabs:nth-child(3) input:checked + label,
 .tabs:nth-child(3) label:hover {
-  background: rgb(60, 226, 255);
+  background: rgb(60, 226, 255, 0.8);
 }
 .menus_drawer:nth-child(4) input:checked + label,
 .tabs:nth-child(4) input:checked + label,
 .tabs:nth-child(4) label:hover {
-  background: rgb(253, 60, 60);
+  background: rgb(253, 60, 60, 0.8);
 }
 .menus_drawer:nth-child(5) input:checked + label,
 .tabs:nth-child(5) input:checked + label,
 .tabs:nth-child(5) label:hover {
-  background: rgb(60, 253, 108);
+  background: rgb(60, 253, 108, 0.8);
   transition: all 0.5s 0s ease;
 }
 .menus_drawer:nth-child(6) input:checked + label,
 .tabs:nth-child(6) input:checked + label,
 .tabs:nth-child(6) label:hover {
-  background: rgb(182, 182, 182);
+  background: rgb(182, 182, 182, 0.8);
 }
 
 /* ハンバーガーメニュー */
@@ -142,7 +144,7 @@ export default {
   height: 3px; /*線の太さ*/
   width: 25px; /*長さ*/
   border-radius: 3px;
-  background: #555;
+  background: rgba(0, 0, 0, 0.842);
   display: block;
   content: "";
   cursor: pointer;
@@ -178,7 +180,8 @@ export default {
   width: 40%;
   max-width: 330px; /*最大幅（お好みで調整を）*/
   height: 100%;
-  background: #eeeeee;
+  background: rgba(0, 0, 0, 0.8);
+  color: bisque;
   transition: 0.3s ease-in-out;
   -webkit-transform: translateX(-105%);
   transform: translateX(-105%);

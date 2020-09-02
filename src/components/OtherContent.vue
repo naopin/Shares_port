@@ -19,6 +19,10 @@
             <div @click="otherOpenModal(), clickOtherItem(item)">
               <img v-bind:src="item.thumbnail" />
               <h2>{{item.title}}</h2>
+              <div class="comments">
+                <h3>コメント</h3>
+                <p>{{item.comment}}</p>
+              </div>
               <div class="username">
                 <p>投稿者:{{item.userName}}</p>
               </div>
@@ -47,32 +51,33 @@ export default {
       //category別の動画
       otherItems: [],
       //category別Iframe
-      otherIframe: ""
+      otherIframe: "",
     };
   },
   created() {
-    this.$nextTick(function() {
+    this.$nextTick(function () {
       const self = this;
       firebaseApp
         .firestore()
         .collection("shares")
         .get()
-        .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
             self.videoItems.push(doc.data());
           });
           //Categoryがotherの動画を取得
-          self.otherItems = self.videoItems.filter(item => {
+          self.otherItems = self.videoItems.filter((item) => {
             return item.category === "Other";
           });
           //otherMap
-          self.otherMapitems = self.otherItems.map(elm => {
+          self.otherMapitems = self.otherItems.map((elm) => {
             return {
               userName: elm.userName,
               url: elm.snippet.url,
               title: elm.snippet.title,
               description: elm.snippet.description,
-              thumbnail: elm.snippet.thumbnails.medium.url
+              thumbnail: elm.snippet.thumbnails.medium.url,
+              comment: elm.comment,
             };
           });
         });
@@ -89,11 +94,11 @@ export default {
     },
     otherCloseModal() {
       this.otherModal = false;
-    }
+    },
   },
   computed: {
     //other検索機能
-    otherReserch: function() {
+    otherReserch: function () {
       let otherMapitems = [];
       for (let i in this.otherMapitems) {
         const otherMapitem = this.otherMapitems[i];
@@ -102,7 +107,7 @@ export default {
         }
       }
       return otherMapitems;
-    }
-  }
+    },
+  },
 };
 </script>

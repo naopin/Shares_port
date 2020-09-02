@@ -19,6 +19,10 @@
             <div @click="reactOpenModal(), clickReactItem(item)">
               <img v-bind:src="item.thumbnail" />
               <h2>{{item.title}}</h2>
+              <div class="comments">
+                <h3>コメント</h3>
+                <p>{{item.comment}}</p>
+              </div>
               <div class="username">
                 <p>投稿者:{{item.userName}}</p>
               </div>
@@ -47,32 +51,33 @@ export default {
       //category別の動画
       reactItems: [],
       //category別Iframe
-      reactIframe: ""
+      reactIframe: "",
     };
   },
   created() {
-    this.$nextTick(function() {
+    this.$nextTick(function () {
       const self = this;
       firebaseApp
         .firestore()
         .collection("shares")
         .get()
-        .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
             self.videoItems.push(doc.data());
           });
           //CategoryがReactの動画を取得
-          self.reactItems = self.videoItems.filter(item => {
+          self.reactItems = self.videoItems.filter((item) => {
             return item.category === "React";
           });
           //ReactMap
-          self.reactMapitems = self.reactItems.map(elm => {
+          self.reactMapitems = self.reactItems.map((elm) => {
             return {
               userName: elm.userName,
               url: elm.snippet.url,
               title: elm.snippet.title,
               description: elm.snippet.description,
-              thumbnail: elm.snippet.thumbnails.medium.url
+              thumbnail: elm.snippet.thumbnails.medium.url,
+              comment: elm.comment,
             };
           });
         });
@@ -90,11 +95,11 @@ export default {
     },
     reactCloseModal() {
       this.reactModal = false;
-    }
+    },
   },
   computed: {
     //react検索機能
-    reactReserch: function() {
+    reactReserch: function () {
       let reactMapitems = [];
       for (let i in this.reactMapitems) {
         const reactMapitem = this.reactMapitems[i];
@@ -103,7 +108,7 @@ export default {
         }
       }
       return reactMapitems;
-    }
-  }
+    },
+  },
 };
 </script>

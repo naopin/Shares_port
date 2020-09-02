@@ -3,7 +3,7 @@
     <nav>
       <div id="header">
         <div class="navbar">
-          <router-link class="navbar_log" to="/">Shares</router-link>
+          <router-link class="navbar_log" to="/home">Shares</router-link>
         </div>
       </div>
     </nav>
