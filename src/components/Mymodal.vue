@@ -27,8 +27,6 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
-
-
 }
 .modal-window {
   background: #fff;
@@ -62,13 +60,28 @@
   opacity: 0;
   transform: translateY(-100px);
 }
-/* button {
-    background: #eb516b;
-    border: none;
-    border-radius: 2px;
-    padding: 4px 16px;
-    color: #fff;
-    transition: background-color .25s;
-    cursor: pointer;
-} */
+
+@media screen and (max-width: 768px) {
+.modal-footer button {
+  font-size: 0.8em;
+}
+}
+
+@media screen and (max-width: 600px) {
+.modal-footer button {
+  font-size: 0.5em;
+}
+.modal-footer  {
+  padding:5px;
+}
+}
+
+@media screen and (max-width: 375px) {
+.modal-footer button {
+  font-size: 0.4em;
+}
+.modal-footer  {
+  padding:2px;
+}
+}
 </style>

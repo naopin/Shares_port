@@ -8,6 +8,23 @@ import 'firebase/analytics';
 import 'firebase/auth'
 // axios
 import axios from 'axios'    
+//pagenation
+
+//fontawsome 
+import { library } from '@fortawesome/fontawesome-svg-core'
+// solidの中で何を使うかをキャメルケースで記載
+import {  faUser,faHome,faShareSquare,faAddressCard,faSignOutAlt,faSignInAlt,faUserPlus } from '@fortawesome/free-solid-svg-icons'
+// brandsの中で何を使うかをキャメルケースで記載
+import { faTwitterSquare } from "@fortawesome/free-brands-svg-icons"
+
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+// 上記で記載したアイコン名をLibraryに追加
+// solid, brands関係なしでOK。
+library.add( faUser,faHome,faShareSquare,faAddressCard,faTwitterSquare,faSignOutAlt,faSignInAlt,faUserPlus)
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
 
 Vue.config.productionTip = false;
 Vue.prototype.$axios = axios;
